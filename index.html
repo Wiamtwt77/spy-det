@@ -3,180 +3,220 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برا السالفة - النسخة الفوضوية</title>
-    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
-    <link href="[https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700;900&display=swap)" rel="stylesheet">
+    <title>برا السالفة - الإصدار العصري الفاخر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Readex Pro', sans-serif; }
-        .glass-panel {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .glass-card {
+            background: rgba(13, 18, 30, 0.75);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
-        .glow-amber { box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3); }
-        .glow-purple { box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.3); }
-        .text-gradient {
-            background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #fef3c7 100%);
+        .gold-gradient {
+            background: linear-gradient(135deg, #fbbf24 0%, #d97706 50%, #b45309 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+        .btn-gold {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            box-shadow: 0 10px 25px -5px rgba(245, 158, 11, 0.4);
+        }
+        .btn-gold:hover {
+            background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+            box-shadow: 0 15px 30px -5px rgba(245, 158, 11, 0.6);
+        }
+        .btn-purple {
+            background: linear-gradient(135deg, #8b5cf6 0%, #6d28d9 100%);
+            box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #f43f5e 0%, #be123c 100%);
+            box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.4);
+        }
+        /* تحسين التمرير */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); border-radius: 10px; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-[#030712] text-slate-100 min-h-screen flex flex-col justify-between selection:bg-amber-500 selection:text-slate-950 relative overflow-x-hidden">
 
-    <!-- خلفية النيون -->
-    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div class="absolute -top-40 -right-40 w-96 h-96 bg-amber-600/20 rounded-full blur-[120px]"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"></div>
-    </div>
+    <!-- خلفية مضيئة متطورة -->
+    <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-br from-amber-500/10 via-purple-600/10 to-transparent blur-[120px] pointer-events-none rounded-full"></div>
 
-    <!-- الهيدر -->
-    <header class="relative z-10 w-full py-4 px-4 border-b border-slate-800/80 backdrop-blur-md">
-        <div class="max-w-xl mx-auto flex justify-between items-center">
+    <!-- شريط التنقل العلوي -->
+    <header class="relative z-20 w-full py-4 px-6 border-b border-slate-800/60 bg-[#030712]/80 backdrop-blur-xl">
+        <div class="max-w-md mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
-                    🕵️
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/30">
+                    🕵️‍♂️
                 </div>
                 <div>
-                    <h1 class="text-lg font-black text-gradient">برا السالفة</h1>
-                    <p class="text-[10px] text-slate-400">المحقق v3.8 Chaos</p>
+                    <h1 class="text-base font-black tracking-wide gold-gradient">برا السالفة</h1>
+                    <p class="text-[10px] text-slate-400 font-medium">النسخة الفوضوية الفاخرة</p>
                 </div>
             </div>
-            <button onclick="showSetup()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-700 text-slate-300 hover:text-amber-400">⚙️ الإعدادات</button>
+            <button onclick="showSetup()" class="px-4 py-2 rounded-xl text-xs font-bold bg-slate-900/90 border border-slate-700/60 text-slate-300 hover:text-amber-400 hover:border-amber-500/40 transition-all shadow-sm">
+                ⚙️ الإعدادات
+            </button>
         </div>
     </header>
 
-    <div class="relative z-10 max-w-md w-full mx-auto p-4 my-auto">
+    <!-- المحتوى الرئيسي -->
+    <main class="relative z-10 max-w-md w-full mx-auto p-4 my-auto">
 
-        <!-- 1. شاشة الإعدادات -->
-        <main id="setup-screen" class="glass-panel rounded-3xl p-6 glow-amber">
-            <h2 class="text-xl font-bold mb-1">اللاعبون في الجولة</h2>
-            <p class="text-xs text-slate-400 mb-5">يتطلب وجود 3 لاعبين كحد أدنى (سيكون أحدهم محققاً خفياً وجاسوساً)</p>
+        <!-- 1. واجهة إعداد اللاعبين -->
+        <div id="setup-screen" class="glass-card rounded-[2.5rem] p-7 transition-all duration-300">
+            <div class="text-center mb-6">
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">إدارة الجولة</span>
+                <h2 class="text-2xl font-black mt-2 text-white">قائمة اللاعبين</h2>
+                <p class="text-xs text-slate-400 mt-1">أضف 3 لاعبين على الأقل لتنطلق الحماس</p>
+            </div>
             
-            <div class="flex gap-2 mb-4">
-                <input type="text" id="player-name-input" placeholder="اسم اللاعب..." class="flex-1 bg-slate-900 border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 text-white">
-                <button onclick="addPlayer()" class="bg-amber-500 hover:bg-amber-400 font-bold text-slate-950 px-5 py-3 rounded-2xl text-sm">إضافة</button>
+            <div class="flex gap-2 mb-5">
+                <input type="text" id="player-name-input" placeholder="اكتب اسم اللاعب هنا..." class="flex-1 bg-slate-900/90 border border-slate-700/60 rounded-2xl px-4 py-3.5 text-xs focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-500/20 text-white placeholder-slate-500 transition-all">
+                <button onclick="addPlayer()" class="btn-gold font-bold text-slate-950 px-6 py-3.5 rounded-2xl text-xs active:scale-95 transition-all">إضافة</button>
             </div>
 
-            <ul id="players-list" class="space-y-2 mb-6 max-h-40 overflow-y-auto"></ul>
+            <div class="bg-slate-900/40 border border-slate-800/80 rounded-2xl p-2 mb-6 max-h-48 overflow-y-auto">
+                <ul id="players-list" class="space-y-1.5"></ul>
+            </div>
 
-            <button onclick="startGame()" class="w-full bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-black py-4 rounded-2xl shadow-xl shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
-                ⚡ بدء الجولة
+            <button onclick="startGame()" class="w-full btn-gold text-slate-950 font-black py-4 rounded-2xl text-sm transition-all active:scale-[0.98] flex items-center justify-center gap-2">
+                <span>⚡ ابدأ الجولة الآن</span>
             </button>
-        </main>
+        </div>
 
-        <!-- 2. شاشة التحميل -->
-        <main id="loading-screen" class="hidden glass-panel rounded-3xl p-8 text-center glow-purple">
-            <div class="w-12 h-12 border-4 border-amber-500/20 border-t-amber-400 rounded-full animate-spin mx-auto mb-4"></div>
-            <h3 class="text-base font-bold mb-1">توليد السالفة وتوزيع الأدوار...</h3>
-            <p class="text-xs text-slate-400">اختيار موضوع عشوائي وتحديد المحقق والجاسوس خفية.</p>
-        </main>
+        <!-- 2. واجهة التحميل والتوليد -->
+        <div id="loading-screen" class="hidden glass-card rounded-[2.5rem] p-10 text-center">
+            <div class="w-14 h-14 border-4 border-amber-500/20 border-t-amber-400 rounded-full animate-spin mx-auto mb-5 shadow-lg shadow-amber-500/20"></div>
+            <h3 class="text-lg font-black text-white mb-2">جاري استدعاء السالفة الفوضوية...</h3>
+            <p class="text-xs text-slate-400">توزيع الأدوار وتجهيز المقالب السرية في الخلفية</p>
+        </div>
 
-        <!-- 3. شاشة قراءة الكروت للأدوار -->
-        <main id="card-screen" class="hidden glass-panel rounded-3xl p-6 text-center">
-            <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full uppercase">تمرير الهاتف</span>
-            <h2 id="current-player-name" class="text-2xl font-black text-slate-100 my-3"></h2>
+        <!-- 3. واجهة قراءة الكروت (تمرير الهاتف) -->
+        <div id="card-screen" class="hidden glass-card rounded-[2.5rem] p-7 text-center">
+            <div class="inline-block px-3 py-1 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20 uppercase tracking-widest mb-3">تمرير الهاتف سرياً</div>
+            <h2 id="current-player-name" class="text-2xl font-black text-white mb-6"></h2>
             
-            <div id="card-box" onclick="toggleRoleReveal()" class="bg-slate-950/80 border-2 border-dashed border-slate-700 hover:border-amber-400 rounded-2xl p-6 my-4 min-h-[160px] flex flex-col justify-center items-center cursor-pointer transition">
-                <p id="card-instruction" class="text-slate-400 text-xs font-bold">اضغط لكشف دورك ورؤية كرتك 👁️</p>
-                <div id="card-content" class="hidden">
-                    <p id="role-title" class="text-xl font-black mb-1"></p>
-                    <p id="role-details" class="text-xs text-slate-300"></p>
+            <div id="card-box" onclick="toggleRoleReveal()" class="bg-slate-950/80 border-2 border-dashed border-slate-700/80 hover:border-amber-400/80 rounded-3xl p-8 my-3 min-h-[200px] flex flex-col justify-center items-center cursor-pointer transition-all group shadow-inner">
+                <div id="card-instruction" class="space-y-2">
+                    <div class="w-12 h-12 rounded-full bg-slate-900 flex items-center justify-center mx-auto text-xl group-hover:scale-110 transition-transform">👁️</div>
+                    <p class="text-slate-300 text-xs font-bold">اضغط هنا لكشف كرتك وسريتك</p>
+                </div>
+                <div id="card-content" class="hidden space-y-2">
+                    <p id="role-title" class="text-xl font-black"></p>
+                    <p id="role-details" class="text-xs text-slate-300 leading-relaxed"></p>
                 </div>
             </div>
 
-            <button id="next-btn" onclick="nextPlayerCard()" class="w-full bg-slate-800 hover:bg-slate-700 font-bold py-3.5 rounded-2xl transition hidden text-sm">
+            <button id="next-btn" onclick="nextPlayerCard()" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-3.5 rounded-2xl transition-all hidden text-xs border border-slate-700/60 active:scale-95">
                 اللاعب التالي ➡️
             </button>
-        </main>
+        </div>
 
-        <!-- 4. شاشة كتابة التلميحات وزر الباذنجان -->
-        <main id="hint-input-screen" class="hidden glass-panel rounded-3xl p-6 glow-purple">
-            <div id="rule-banner" class="hidden mb-4 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs text-center font-bold"></div>
+        <!-- 4. واجهة كتابة التلميحات وزر التخريب (الباذنجان) -->
+        <div id="hint-input-screen" class="hidden glass-card rounded-[2.5rem] p-7">
+            <div id="rule-banner" class="hidden mb-4 p-3.5 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs text-center font-bold shadow-sm"></div>
 
-            <h2 class="text-lg font-bold text-center mb-1">✍️ مرحلة كتابة التلميحات</h2>
-            <p class="text-xs text-slate-400 text-center mb-4">مرر الهاتف لكل لاعب ليكتب تلميحه الخاص</p>
+            <div class="text-center mb-5">
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">مرحلة كتابة التلميحات</span>
+                <h2 id="hint-writer-name" class="text-xl font-black text-white mt-2"></h2>
+                <p class="text-xs text-slate-400 mt-1">اكتب تلميحاً ذكياً يتناسب مع السالفة</p>
+            </div>
 
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4 text-center">
-                <h3 id="hint-writer-name" class="text-base font-bold text-amber-400 mb-2"></h3>
-                
-                <!-- زر الباذنجان الشرير (20%) -->
-                <div id="eggplant-box" class="hidden my-3 p-3 bg-purple-950/60 border border-purple-500/40 rounded-xl text-right">
-                    <p class="text-[11px] font-bold text-purple-300 mb-2">🍆 لديك ميزة تخريب التلميح (زر الباذنجان)! اختر لاعباً لتخريب تلميحه:</p>
-                    <div class="flex gap-2">
-                        <select id="eggplant-target-select" class="flex-1 bg-slate-900 border border-slate-700 text-xs rounded-xl px-2 py-1.5 text-white"></select>
-                        <button onclick="applyEggplantSabotage()" id="eggplant-apply-btn" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl">تخريب!</button>
-                    </div>
+            <!-- زر الباذنجان الشرير (ظهور نادر 20%) -->
+            <div id="eggplant-box" class="hidden mb-5 p-4 bg-purple-950/40 border border-purple-500/40 rounded-2xl text-right shadow-lg">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="text-lg">🍆</span>
+                    <p class="text-xs font-bold text-purple-300">ميزة تخريب التلميح متاحة لك!</p>
                 </div>
+                <p class="text-[11px] text-slate-400 mb-3">اختر لاعباً لتخريب تلميحه بكلمة مضحكة عشوائية:</p>
+                <div class="flex gap-2">
+                    <select id="eggplant-target-select" class="flex-1 bg-slate-900 border border-purple-500/30 text-xs rounded-xl px-3 py-2 text-white focus:outline-none"></select>
+                    <button onclick="applyEggplantSabotage()" id="eggplant-apply-btn" class="btn-purple text-white text-xs font-bold px-4 py-2 rounded-xl transition-all active:scale-95">تخريب!</button>
+                </div>
+            </div>
 
-                <input type="text" id="player-hint-input" placeholder="اكتب تلميحك هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-400 mb-3">
-                
-                <button onclick="submitPlayerHint()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs">
+            <div class="space-y-4">
+                <input type="text" id="player-hint-input" placeholder="اكتب تلميحك هنا..." class="w-full bg-slate-900/90 border border-slate-700/60 rounded-2xl px-4 py-3.5 text-xs text-white focus:outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-500/20 placeholder-slate-500">
+                <button onclick="submitPlayerHint()" class="w-full btn-gold text-slate-950 font-black py-3.5 rounded-2xl text-xs transition-all active:scale-95">
                     حفظ التلميح والانتقال للبعده ➡️
                 </button>
             </div>
-        </main>
+        </div>
 
-        <!-- 5. شاشة استعراض التلميحات والبدء بالنقاش -->
-        <main id="discussion-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
-            <h2 class="text-xl font-black text-amber-400 mb-3">🗣️ لوحة التلميحات والنقاش</h2>
+        <!-- 5. واجهة استعراض التلميحات والأزرار الـ 3 الرئيسية -->
+        <div id="discussion-screen" class="hidden glass-card rounded-[2.5rem] p-7">
+            <div class="text-center mb-5">
+                <span class="px-3 py-1 rounded-full text-[10px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 uppercase tracking-widest">مرحلة النقاش المفتوح</span>
+                <h2 class="text-xl font-black text-white mt-2">🗣️ لوحة التلميحات</h2>
+                <p class="text-xs text-slate-400 mt-1">افحصوا التلميحات وابدؤوا النقاش بحذر</p>
+            </div>
             
-            <div id="hints-display-board" class="space-y-2 mb-6 text-right max-h-48 overflow-y-auto"></div>
+            <div id="hints-display-board" class="space-y-2 mb-6 max-h-48 overflow-y-auto p-1"></div>
 
-            <p class="text-xs text-slate-400 mb-5">تناقشوا واسألوا بعضكم، استخدم الأزرار أدناه لاتخاذ قرارات الجولة:</p>
-
-            <!-- الأزرار الـ 3 الأساسية -->
-            <div class="space-y-2">
-                <button onclick="startGame()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-3 rounded-2xl text-xs flex justify-center items-center gap-2 border border-slate-700">
+            <div class="border-t border-slate-800/80 pt-5 space-y-2.5">
+                <button onclick="startGame()" class="w-full bg-slate-900/90 hover:bg-slate-800 text-slate-200 font-bold py-3.5 rounded-2xl text-xs flex justify-center items-center gap-2 border border-slate-700/60 transition-all active:scale-95">
                     🔄 لمّح مرة أخرى مع جولة جديدة
                 </button>
-                <button onclick="openDetectiveVote()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 text-white font-bold py-3 rounded-2xl text-xs shadow-lg shadow-purple-600/20">
-                    🕵️‍♂️ كشف المحقق
+                <button onclick="openDetectiveVote()" class="w-full btn-purple text-white font-bold py-3.5 rounded-2xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2">
+                    <span>🕵️‍♂️ كشف المحقق</span>
                 </button>
-                <button onclick="openSpyVote()" class="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:brightness-110 text-white font-bold py-3.5 rounded-2xl text-xs shadow-lg shadow-red-600/20">
-                    🚨 اتهام جاسوس
+                <button onclick="openSpyVote()" class="w-full btn-danger text-white font-bold py-4 rounded-2xl text-xs transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg shadow-red-500/20">
+                    <span>🚨 اتهام جاسوس</span>
                 </button>
             </div>
-        </main>
+        </div>
 
-        <!-- 6. شاشة التصويت (للمحقق أو الجاسوس) -->
-        <main id="voting-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
-            <h2 id="vote-screen-title" class="text-lg font-bold text-slate-100 mb-1"></h2>
-            <p id="vote-screen-subtitle" class="text-xs text-slate-400 mb-4"></p>
+        <!-- 6. واجهة التصويت (جاسوس أو محقق) -->
+        <div id="voting-screen" class="hidden glass-card rounded-[2.5rem] p-7 text-center">
+            <div class="mb-5">
+                <span id="vote-badge" class="px-3 py-1 rounded-full text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20 uppercase tracking-widest">مرحلة الاتهام</span>
+                <h2 id="vote-screen-title" class="text-xl font-black text-white mt-2"></h2>
+                <p id="vote-screen-subtitle" class="text-xs text-slate-400 mt-1"></p>
+            </div>
 
-            <div id="voting-candidates-list" class="space-y-2 mb-6"></div>
+            <div id="voting-candidates-list" class="space-y-2 mb-6 max-h-48 overflow-y-auto"></div>
 
-            <button onclick="confirmVoteAction()" id="confirm-vote-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-2xl transition hidden text-xs">
-                تأكيد القصد
+            <button onclick="confirmVoteAction()" id="confirm-vote-btn" class="w-full btn-gold text-slate-950 font-black py-4 rounded-2xl transition-all hidden text-xs active:scale-95">
+                تأكيد الاتهام النهائي ⚖️
             </button>
-        </main>
+        </div>
 
-        <!-- 7. شاشة النتائج والحقيقة -->
-        <main id="result-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
-            <div id="result-icon" class="text-4xl mb-2"></div>
+        <!-- 7. واجهة النتائج واللوحة -->
+        <div id="result-screen" class="hidden glass-card rounded-[2.5rem] p-7 text-center">
+            <div id="result-icon" class="text-5xl mb-3"></div>
             <h2 id="result-title" class="text-xl font-black mb-1"></h2>
-            <p id="result-desc" class="text-xs text-slate-300 mb-5 leading-relaxed"></p>
+            <p id="result-desc" class="text-xs text-slate-300 mb-6 leading-relaxed"></p>
 
-            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-5 text-right space-y-1.5 text-xs">
-                <p><span class="text-slate-400">السالفة الأصلية:</span> <strong id="res-topic" class="text-amber-400"></strong></p>
-                <p><span class="text-slate-400">التصنيف:</span> <strong id="res-category" class="text-slate-200"></strong></p>
-                <p><span class="text-slate-400">الجاسوس الحقيقي:</span> <strong id="res-spy" class="text-red-400"></strong></p>
-                <p><span class="text-slate-400">المحقق الخفي:</span> <strong id="res-detective" class="text-purple-400"></strong></p>
+            <div class="bg-slate-950/70 p-4 rounded-2xl border border-slate-800/80 mb-6 text-right space-y-2 text-xs">
+                <div class="flex justify-between"><span class="text-slate-400">السالفة الأصلية:</span> <strong id="res-topic" class="text-amber-400"></strong></div>
+                <div class="flex justify-between"><span class="text-slate-400">التصنيف:</span> <strong id="res-category" class="text-slate-200"></strong></div>
+                <div class="flex justify-between"><span class="text-slate-400">الجاسوس الحقيقي:</span> <strong id="res-spy" class="text-rose-400"></strong></div>
+                <div class="flex justify-between"><span class="text-slate-400">المحقق الخفي:</span> <strong id="res-detective" class="text-purple-400"></strong></div>
             </div>
 
             <!-- لوحة النقاط -->
-            <div class="mb-5 text-right">
-                <h4 class="text-xs font-bold text-slate-400 mb-2">📊 لوحة النقاط:</h4>
-                <div id="scoreboard" class="space-y-1 max-h-32 overflow-y-auto"></div>
+            <div class="mb-6 text-right">
+                <h4 class="text-xs font-bold text-slate-400 mb-2">📊 ترتيب النقاط الحالي:</h4>
+                <div id="scoreboard" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
             </div>
 
-            <button onclick="startGame()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-amber-500/20">
+            <button onclick="startGame()" class="w-full btn-gold text-slate-950 font-black py-4 rounded-2xl text-xs transition-all active:scale-95 shadow-lg shadow-amber-500/20">
                 🔄 جولة جديدة بنفس اللاعبين
             </button>
-        </main>
+        </div>
 
-    </div>
+    </main>
+
+    <!-- الهيدر السفلي الحقوق -->
+    <footer class="relative z-10 w-full py-4 text-center text-[10px] text-slate-500 border-t border-slate-900">
+        برا السالفة • جميع الحقوق محفوظة لجلستكم الفوضوية 🎮
+    </footer>
 
     <script>
         let players = ["فهد", "سارة", "خالد", "نورة"];
@@ -193,7 +233,7 @@
         let eggplantHolderIdx = -1;
         let eggplantSabotagedTargetIdx = -1;
 
-        let currentVoteMode = ""; // "SPY" or "DETECTIVE"
+        let currentVoteMode = ""; 
         let selectedVoteIdx = null;
 
         const funnyWords = ["باذنجان 🍆", "شاورما 🌯", "طبلة 🥁", "طاقية 🧢", "كبسة 🍲", "حبل 🪢"];
@@ -201,9 +241,9 @@
         function renderPlayers() {
             const list = document.getElementById('players-list');
             list.innerHTML = players.map((p, i) => `
-                <li class="flex justify-between items-center bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl text-xs">
-                    <span>${p}</span>
-                    <button onclick="removePlayer(${i})" class="text-red-400 font-bold">حذف</button>
+                <li class="flex justify-between items-center bg-slate-900/80 border border-slate-800/80 px-4 py-3 rounded-xl text-xs">
+                    <span class="font-bold text-slate-200">👤 ${p}</span>
+                    <button onclick="removePlayer(${i})" class="text-rose-400 hover:text-rose-300 font-bold px-2 py-1 transition-all">حذف</button>
                 </li>
             `).join('');
         }
@@ -245,7 +285,6 @@
 
                 roundData = data;
                 
-                // تحديد الجاسوس والمحقق
                 spyIndex = Math.floor(Math.random() * players.length);
                 do {
                     detectiveIndex = Math.floor(Math.random() * players.length);
@@ -256,7 +295,6 @@
                 hintWritingIdx = 0;
                 eggplantSabotagedTargetIdx = -1;
 
-                // زر الباذنجان (20% احتمال)
                 if (roundData.has_eggplant_button) {
                     eggplantHolderIdx = Math.floor(Math.random() * players.length);
                 } else {
@@ -293,16 +331,16 @@
 
             if (currentCardIdx === spyIndex) {
                 title.innerText = "🕵️‍♂️ أنت الجاسوس!";
-                title.className = "text-xl font-black text-red-500 mb-1";
-                details.innerText = `التصنيف: [${roundData.category}] \n التلميح: [${roundData.spy_hint}]`;
+                title.className = "text-xl font-black text-rose-500 mb-1";
+                details.innerHTML = `التصنيف: <span class="text-amber-400">[${roundData.category}]</span><br>التلميح البعيد: <span class="text-purple-400">[${roundData.spy_hint}]</span>`;
             } else if (currentCardIdx === detectiveIndex) {
                 title.innerText = "🕵️‍♀️ أنت المحقق الخفي!";
                 title.className = "text-xl font-black text-purple-400 mb-1";
-                details.innerText = `السالفة: [${roundData.topic}] \n مهمتك كشف الجاسوس دون كشف نفسك!`;
+                details.innerHTML = `السالفة: <span class="text-amber-400">[${roundData.topic}]</span><br>راقب وارصد دون أن تكشف هويتك!`;
             } else {
                 title.innerText = `السالفة: ${roundData.topic}`;
                 title.className = "text-xl font-black text-amber-400 mb-1";
-                details.innerText = `التصنيف: ${roundData.category}`;
+                details.innerHTML = `التصنيف: <span class="text-slate-200">${roundData.category}</span>`;
             }
 
             document.getElementById('next-btn').classList.remove('hidden');
@@ -320,13 +358,12 @@
         function startHintWritingPhase() {
             hideAll();
             
-            // تنبيه القاعدة الخاصة إن وجدت
             const ruleBanner = document.getElementById('rule-banner');
             if (roundData.rule === "EMOJI_ONLY") {
-                ruleBanner.innerText = "🥑 قاعدة الجولة: التلميح بالإيموجي فقط! ممنوع الأحرف.";
+                ruleBanner.innerText = "🥑 قاعدة الجولة: التلميح بالإيموجي فقط! ممنوع كتابة الحروف.";
                 ruleBanner.classList.remove('hidden');
             } else if (roundData.rule === "REVERSE_HINT") {
-                ruleBanner.innerText = "🔄 قاعدة الجولة: التلميح العكسي! اكتب صفة غير موجودة.";
+                ruleBanner.innerText = "🔄 قاعدة الجولة: التلميح العكسي! اكتب صفة عكسية تماماً.";
                 ruleBanner.classList.remove('hidden');
             } else {
                 ruleBanner.classList.add('hidden');
@@ -354,8 +391,10 @@
         function applyEggplantSabotage() {
             const select = document.getElementById('eggplant-target-select');
             eggplantSabotagedTargetIdx = parseInt(select.value);
-            document.getElementById('eggplant-apply-btn').innerText = "تم التخريب! 🍆";
-            document.getElementById('eggplant-apply-btn').disabled = true;
+            const btn = document.getElementById('eggplant-apply-btn');
+            btn.innerText = "تم التخريب بنجاح! 🍆";
+            btn.disabled = true;
+            btn.className = "bg-slate-800 text-slate-400 text-xs font-bold px-4 py-2 rounded-xl cursor-not-allowed";
         }
 
         function submitPlayerHint() {
@@ -373,7 +412,6 @@
         }
 
         function finalizeHintsAndStartDiscussion() {
-            // استبدال التلميح بالكلمة المضحكة إذا تم التخريب
             if (eggplantSabotagedTargetIdx !== -1) {
                 const victimName = players[eggplantSabotagedTargetIdx];
                 const randWord = funnyWords[Math.floor(Math.random() * funnyWords.length)];
@@ -382,12 +420,11 @@
 
             hideAll();
             
-            // استعراض التلميحات
             const board = document.getElementById('hints-display-board');
             board.innerHTML = players.map(p => `
-                <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-xl flex justify-between text-xs">
-                    <span class="text-slate-400 font-bold">${p}:</span>
-                    <span class="text-amber-300 font-bold">${playerHints[p]}</span>
+                <div class="bg-slate-900/80 border border-slate-800/80 p-3 rounded-2xl flex justify-between items-center text-xs shadow-sm">
+                    <span class="text-slate-400 font-bold">👤 ${p}:</span>
+                    <span class="text-amber-300 font-black tracking-wide">${playerHints[p]}</span>
                 </div>
             `).join('');
 
@@ -396,15 +433,17 @@
 
         function openSpyVote() {
             currentVoteMode = "SPY";
+            document.getElementById('vote-badge').className = "px-3 py-1 rounded-full text-[10px] font-bold bg-red-500/10 text-red-400 border border-red-500/20 uppercase tracking-widest";
             document.getElementById('vote-screen-title').innerText = "🚨 اتهام جاسوس";
-            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه الجاسوس الحقيقي؟";
+            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه الجاسوس المختبئ؟";
             renderVoteCandidates();
         }
 
         function openDetectiveVote() {
             currentVoteMode = "DETECTIVE";
-            document.getElementById('vote-screen-title').innerText = "🕵️‍♂️ كشف المحقق";
-            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه المحقق الخفي؟";
+            document.getElementById('vote-badge').className = "px-3 py-1 rounded-full text-[10px] font-bold bg-purple-500/10 text-purple-400 border border-purple-500/20 uppercase tracking-widest";
+            document.getElementById('vote-screen-title').innerText = "🕵️‍♂️ كشف المحقق الخفي";
+            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه المحقق الذي يراقبكم؟";
             renderVoteCandidates();
         }
 
@@ -415,9 +454,9 @@
 
             const container = document.getElementById('voting-candidates-list');
             container.innerHTML = players.map((p, i) => `
-                <button onclick="selectCandidate(${i})" id="cand-btn-${i}" class="w-full flex justify-between items-center bg-slate-900 border border-slate-800 px-4 py-3 rounded-2xl text-xs font-bold">
-                    <span>👤 ${p}</span>
-                    <span class="text-slate-500 text-[10px]">تحديد</span>
+                <button onclick="selectCandidate(${i})" id="cand-btn-${i}" class="w-full flex justify-between items-center bg-slate-900/80 border border-slate-800/80 px-4 py-3.5 rounded-2xl text-xs font-bold transition-all hover:border-slate-700">
+                    <span class="text-slate-200">👤 ${p}</span>
+                    <span class="text-slate-500 text-[10px] font-medium bg-slate-800 px-2.5 py-1 rounded-lg">اختيار</span>
                 </button>
             `).join('');
 
@@ -429,9 +468,9 @@
             players.forEach((_, idx) => {
                 const btn = document.getElementById(`cand-btn-${idx}`);
                 if (idx === i) {
-                    btn.className = "w-full flex justify-between items-center bg-amber-500/10 border-2 border-amber-400 px-4 py-3 rounded-2xl text-xs font-bold text-amber-400";
+                    btn.className = "w-full flex justify-between items-center bg-amber-500/10 border-2 border-amber-400 px-4 py-3.5 rounded-2xl text-xs font-bold text-amber-400 shadow-md";
                 } else {
-                    btn.className = "w-full flex justify-between items-center bg-slate-900 border border-slate-800 opacity-50 px-4 py-3 rounded-2xl text-xs font-bold";
+                    btn.className = "w-full flex justify-between items-center bg-slate-900/40 border border-slate-800/40 opacity-40 px-4 py-3.5 rounded-2xl text-xs font-bold";
                 }
             });
             document.getElementById('confirm-vote-btn').classList.remove('hidden');
@@ -451,19 +490,17 @@
 
             if (currentVoteMode === "SPY") {
                 if (selectedVoteIdx === spyIndex) {
-                    // كشف الجاسوس
                     players.forEach((p, i) => { if (i !== spyIndex) scores[p] = (scores[p] || 0) + 2; });
                     icon.innerText = "🎉";
                     title.innerText = "تم كشف الجاسوس بنجاح!";
                     title.className = "text-xl font-black text-amber-400 mb-1";
-                    desc.innerText = `صوّتم ضد [${votedPlayer}] وكان بالفعل هو الجاسوس!`;
+                    desc.innerText = `صوّتم ضد [${votedPlayer}] وكان بالفعل هو الجاسوس المختبئ!`;
                 } else {
-                    // نجا الجاسوس
                     scores[spyName] = (scores[spyName] || 0) + 3;
                     icon.innerText = "🕵️‍♂️";
                     title.innerText = "الجاسوس خدع الجميع ونجا!";
-                    title.className = "text-xl font-black text-red-500 mb-1";
-                    desc.innerText = `اتهمتم المظلوم [${votedPlayer}] بينما الجاسوس هو [${spyName}]!`;
+                    title.className = "text-xl font-black text-rose-500 mb-1";
+                    desc.innerText = `اتهمتم اللاعب المظلوم [${votedPlayer}] بينما الجاسوس الحقيقي هو [${spyName}]!`;
                 }
             } else if (currentVoteMode === "DETECTIVE") {
                 if (selectedVoteIdx === detectiveIndex) {
@@ -473,10 +510,10 @@
                     title.className = "text-xl font-black text-purple-400 mb-1";
                     desc.innerText = `[${votedPlayer}] هو المحقق بالفعل وحصل على نقاط الاكتشاف!`;
                 } else {
-                    icon.innerText = "❌";
-                    title.innerText = "المحقق ذكي ولم ينكشف!";
+                    icon.innerText = "🛡️";
+                    title.innerText = "المحقق بقي في الظل ولم ينكشف!";
                     title.className = "text-xl font-black text-slate-300 mb-1";
-                    desc.innerText = `اتهمتم [${votedPlayer}] ولكنه ليس المحقق! المحقق هو [${detectiveName}].`;
+                    desc.innerText = `اتهمتم [${votedPlayer}] وليس هو المحقق! المحقق الحقيقي هو [${detectiveName}].`;
                 }
             }
 
@@ -493,8 +530,8 @@
             const board = document.getElementById('scoreboard');
             const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
             board.innerHTML = sorted.map(([name, sc], rank) => `
-                <div class="flex justify-between items-center bg-slate-900 px-3 py-1.5 rounded-xl text-xs">
-                    <span class="${rank === 0 ? 'text-amber-400 font-bold' : 'text-slate-300'}">#${rank+1} ${name}</span>
+                <div class="flex justify-between items-center bg-slate-900/80 border border-slate-800/80 px-3.5 py-2 rounded-xl text-xs">
+                    <span class="${rank === 0 ? 'text-amber-400 font-black' : 'text-slate-300 font-bold'}">#${rank+1} ${name}</span>
                     <span class="font-mono text-amber-400 font-bold">${sc} نقطة</span>
                 </div>
             `).join('');
