@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برا السالفة - Full AI Experience</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <title>برا السالفة - النسخة الفوضوية</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Readex+Pro:wght@300;500;700;900&display=swap)" rel="stylesheet">
     <style>
         body { font-family: 'Readex Pro', sans-serif; }
         .glass-panel {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .glow-amber { box-shadow: 0 0 40px -10px rgba(245, 158, 11, 0.3); }
-        .glow-cyan { box-shadow: 0 0 40px -10px rgba(6, 182, 212, 0.3); }
-        .glow-red { box-shadow: 0 0 40px -10px rgba(239, 68, 68, 0.3); }
+        .glow-purple { box-shadow: 0 0 40px -10px rgba(168, 85, 247, 0.3); }
         .text-gradient {
             background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #fef3c7 100%);
             -webkit-background-clip: text;
@@ -26,199 +25,185 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between overflow-x-hidden selection:bg-amber-500 selection:text-slate-950">
 
-    <!-- خلفية نيون متدرجة -->
+    <!-- خلفية النيون -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
         <div class="absolute -top-40 -right-40 w-96 h-96 bg-amber-600/20 rounded-full blur-[120px]"></div>
-        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-600/15 rounded-full blur-[120px]"></div>
+        <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-purple-600/20 rounded-full blur-[120px]"></div>
     </div>
 
     <!-- الهيدر -->
-    <header class="relative z-10 w-full py-5 px-4 border-b border-slate-800/80 backdrop-blur-md">
+    <header class="relative z-10 w-full py-4 px-4 border-b border-slate-800/80 backdrop-blur-md">
         <div class="max-w-xl mx-auto flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-500 to-amber-300 flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-amber-500/20">
                     🕵️
                 </div>
                 <div>
-                    <h1 class="text-xl font-black text-gradient tracking-tight">برا السالفة</h1>
-                    <p class="text-[10px] text-slate-400 font-semibold tracking-wider">النسخة التفاعلية الشاملة</p>
+                    <h1 class="text-lg font-black text-gradient">برا السالفة</h1>
+                    <p class="text-[10px] text-slate-400">المحقق v3.8 Chaos</p>
                 </div>
             </div>
-            <button onclick="showSetup()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-700 text-slate-300 hover:text-amber-400 transition">
-                ⚙️ الإعدادات
-            </button>
+            <button onclick="showSetup()" class="px-3 py-1.5 rounded-xl text-xs font-bold bg-slate-900 border border-slate-700 text-slate-300 hover:text-amber-400">⚙️ الإعدادات</button>
         </div>
     </header>
 
-    <!-- المحتوى الرئيسي -->
     <div class="relative z-10 max-w-md w-full mx-auto p-4 my-auto">
 
-        <!-- 1. شاشة إعداد اللاعبين -->
+        <!-- 1. شاشة الإعدادات -->
         <main id="setup-screen" class="glass-panel rounded-3xl p-6 glow-amber">
-            <h2 class="text-xl font-bold mb-1 text-slate-100">لاعبين الجولة</h2>
-            <p class="text-xs text-slate-400 mb-6">أدخل أسماء اللاعبين (3 كحد أدنى)</p>
+            <h2 class="text-xl font-bold mb-1">اللاعبون في الجولة</h2>
+            <p class="text-xs text-slate-400 mb-5">يتطلب وجود 3 لاعبين كحد أدنى (سيكون أحدهم محققاً خفياً وجاسوساً)</p>
             
-            <div class="flex gap-2 mb-5">
-                <input type="text" id="player-name-input" placeholder="اسم اللاعب..." class="flex-1 bg-slate-900/90 border border-slate-700/80 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 transition text-white placeholder:text-slate-500">
-                <button onclick="addPlayer()" class="bg-amber-500 hover:bg-amber-400 font-bold text-slate-950 px-5 py-3 rounded-2xl transition shadow-lg shadow-amber-500/20 active:scale-95 text-sm">
-                    إضافة
-                </button>
+            <div class="flex gap-2 mb-4">
+                <input type="text" id="player-name-input" placeholder="اسم اللاعب..." class="flex-1 bg-slate-900 border border-slate-700 rounded-2xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 text-white">
+                <button onclick="addPlayer()" class="bg-amber-500 hover:bg-amber-400 font-bold text-slate-950 px-5 py-3 rounded-2xl text-sm">إضافة</button>
             </div>
 
-            <ul id="players-list" class="space-y-2 mb-6 max-h-40 overflow-y-auto pl-1"></ul>
+            <ul id="players-list" class="space-y-2 mb-6 max-h-40 overflow-y-auto"></ul>
 
-            <button onclick="startGame()" class="w-full bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 text-slate-950 font-black text-base py-4 rounded-2xl shadow-xl shadow-amber-500/25 hover:brightness-110 active:scale-[0.98] transition flex justify-center items-center gap-2">
+            <button onclick="startGame()" class="w-full bg-gradient-to-r from-amber-500 to-amber-400 text-slate-950 font-black py-4 rounded-2xl shadow-xl shadow-amber-500/20 hover:brightness-110 active:scale-[0.98] transition">
                 ⚡ بدء الجولة
             </button>
         </main>
 
         <!-- 2. شاشة التحميل -->
-        <main id="loading-screen" class="hidden glass-panel rounded-3xl p-8 text-center glow-cyan">
-            <div class="relative w-16 h-16 mx-auto mb-6">
-                <div class="absolute inset-0 rounded-full border-4 border-amber-500/20 border-t-amber-400 animate-spin"></div>
-                <div class="absolute inset-2 rounded-full border-4 border-cyan-500/20 border-b-cyan-400 animate-spin flex items-center justify-center"></div>
-            </div>
-            <h3 class="text-lg font-bold text-slate-100 mb-2">جاري توليد السالفة بواسطة AI...</h3>
-            <p class="text-xs text-slate-400 leading-relaxed">نجهز موضوعاً مادياً ملموساً ونمط الجولة والتلميحات.</p>
+        <main id="loading-screen" class="hidden glass-panel rounded-3xl p-8 text-center glow-purple">
+            <div class="w-12 h-12 border-4 border-amber-500/20 border-t-amber-400 rounded-full animate-spin mx-auto mb-4"></div>
+            <h3 class="text-base font-bold mb-1">توليد السالفة وتوزيع الأدوار...</h3>
+            <p class="text-xs text-slate-400">اختيار موضوع عشوائي وتحديد المحقق والجاسوس خفية.</p>
         </main>
 
-        <!-- 3. شاشة الخطأ -->
-        <main id="error-screen" class="hidden glass-panel rounded-3xl p-6 border-red-500/30 text-center">
-            <div class="w-12 h-12 rounded-2xl bg-red-500/10 border border-red-500/30 text-red-400 flex items-center justify-center mx-auto mb-4 text-2xl">⚠️</div>
-            <h3 class="text-lg font-bold text-red-400 mb-2">حدث خطأ في الاتصال!</h3>
-            <p id="error-message" class="text-xs text-slate-300 mb-6 bg-slate-950/60 p-3 rounded-xl border border-slate-800 text-right font-mono dir-ltr overflow-x-auto max-h-32"></p>
-            <button onclick="showSetup()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-2xl transition text-sm">العودة للإعدادات</button>
-        </main>
-
-        <!-- 4. شاشة كشف الكروت -->
+        <!-- 3. شاشة قراءة الكروت للأدوار -->
         <main id="card-screen" class="hidden glass-panel rounded-3xl p-6 text-center">
-            <span class="text-[10px] font-bold text-amber-400 tracking-widest bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full uppercase">تمرير الهاتف للاعب</span>
-            <h2 id="current-player-name" class="text-2xl font-black text-slate-100 my-4"></h2>
+            <span class="text-[10px] font-bold text-amber-400 bg-amber-500/10 border border-amber-500/20 px-3 py-1 rounded-full uppercase">تمرير الهاتف</span>
+            <h2 id="current-player-name" class="text-2xl font-black text-slate-100 my-3"></h2>
             
-            <div id="card-box" onclick="toggleRoleReveal()" class="bg-slate-950/80 border-2 border-dashed border-slate-700 hover:border-amber-400/60 rounded-2xl p-6 my-4 min-h-[180px] flex flex-col justify-center items-center cursor-pointer transition active:scale-[0.99] group">
-                <p id="card-instruction" class="text-slate-400 text-xs font-bold group-hover:text-amber-400 transition">اضغط هنا لكشف كرتك 👁️</p>
+            <div id="card-box" onclick="toggleRoleReveal()" class="bg-slate-950/80 border-2 border-dashed border-slate-700 hover:border-amber-400 rounded-2xl p-6 my-4 min-h-[160px] flex flex-col justify-center items-center cursor-pointer transition">
+                <p id="card-instruction" class="text-slate-400 text-xs font-bold">اضغط لكشف دورك ورؤية كرتك 👁️</p>
                 <div id="card-content" class="hidden">
-                    <p id="role-title" class="text-2xl font-black mb-2"></p>
-                    <p id="role-details" class="text-slate-300 text-sm font-medium"></p>
+                    <p id="role-title" class="text-xl font-black mb-1"></p>
+                    <p id="role-details" class="text-xs text-slate-300"></p>
                 </div>
             </div>
 
-            <button id="next-btn" onclick="nextPlayerCard()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3.5 rounded-2xl transition hidden text-sm">
+            <button id="next-btn" onclick="nextPlayerCard()" class="w-full bg-slate-800 hover:bg-slate-700 font-bold py-3.5 rounded-2xl transition hidden text-sm">
                 اللاعب التالي ➡️
             </button>
         </main>
 
-        <!-- 5. شاشة النقاش واللعب التفاعلي -->
-        <main id="discussion-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
-            <!-- نمط الجولة والعداد -->
-            <div class="flex justify-between items-center mb-4">
-                <span id="mode-badge" class="text-[11px] font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full"></span>
-                <div class="flex items-center gap-1 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-amber-400 font-mono font-bold text-sm">
-                    ⏱️ <span id="timer-display">03:00</span>
+        <!-- 4. شاشة كتابة التلميحات وزر الباذنجان -->
+        <main id="hint-input-screen" class="hidden glass-panel rounded-3xl p-6 glow-purple">
+            <div id="rule-banner" class="hidden mb-4 p-3 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-300 text-xs text-center font-bold"></div>
+
+            <h2 class="text-lg font-bold text-center mb-1">✍️ مرحلة كتابة التلميحات</h2>
+            <p class="text-xs text-slate-400 text-center mb-4">مرر الهاتف لكل لاعب ليكتب تلميحه الخاص</p>
+
+            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-4 text-center">
+                <h3 id="hint-writer-name" class="text-base font-bold text-amber-400 mb-2"></h3>
+                
+                <!-- زر الباذنجان الشرير (20%) -->
+                <div id="eggplant-box" class="hidden my-3 p-3 bg-purple-950/60 border border-purple-500/40 rounded-xl text-right">
+                    <p class="text-[11px] font-bold text-purple-300 mb-2">🍆 لديك ميزة تخريب التلميح (زر الباذنجان)! اختر لاعباً لتخريب تلميحه:</p>
+                    <div class="flex gap-2">
+                        <select id="eggplant-target-select" class="flex-1 bg-slate-900 border border-slate-700 text-xs rounded-xl px-2 py-1.5 text-white"></select>
+                        <button onclick="applyEggplantSabotage()" id="eggplant-apply-btn" class="bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl">تخريب!</button>
+                    </div>
                 </div>
-            </div>
 
-            <h2 class="text-2xl font-black text-slate-100 mb-1">🔥 بدأت السالفة!</h2>
-            <p class="text-xs text-slate-400 mb-5">اسألوا بعضكم للوصول للجاسوس دون كشف السالفة.</p>
-
-            <!-- زر التخريب إن وجد -->
-            <div id="sabotage-container" class="hidden mb-5">
-                <button onclick="triggerSabotage()" id="sabotage-btn" class="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:brightness-110 text-white font-bold py-3 rounded-2xl shadow-lg shadow-red-600/30 transition text-xs flex justify-center items-center gap-2">
-                    💣 تفعيل زر التخريب (حدث مفاجئ)
+                <input type="text" id="player-hint-input" placeholder="اكتب تلميحك هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-xs text-white focus:outline-none focus:border-amber-400 mb-3">
+                
+                <button onclick="submitPlayerHint()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold py-3 rounded-xl text-xs">
+                    حفظ التلميح والانتقال للبعده ➡️
                 </button>
-                <p id="sabotage-text" class="hidden mt-2 text-xs font-bold text-red-400 bg-red-950/60 p-3 rounded-xl border border-red-500/30 animate-pulse"></p>
             </div>
+        </main>
 
-            <!-- مساعد الأسئلة ومن يبدأ -->
-            <div class="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl mb-6 text-right">
-                <div class="flex justify-between items-center mb-2">
-                    <span class="text-xs font-bold text-slate-300">💡 مُساعد الجولة:</span>
-                    <button onclick="pickRandomQuestion()" class="text-[10px] text-amber-400 underline hover:text-amber-300 font-bold">من يسأل من؟</button>
-                </div>
-                <p id="helper-text" class="text-xs text-slate-400 italic">اضغط "من يسأل من؟" لبدء أوّل سؤال في الجولة بشكل عشوائي!</p>
+        <!-- 5. شاشة استعراض التلميحات والبدء بالنقاش -->
+        <main id="discussion-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
+            <h2 class="text-xl font-black text-amber-400 mb-3">🗣️ لوحة التلميحات والنقاش</h2>
+            
+            <div id="hints-display-board" class="space-y-2 mb-6 text-right max-h-48 overflow-y-auto"></div>
+
+            <p class="text-xs text-slate-400 mb-5">تناقشوا واسألوا بعضكم، استخدم الأزرار أدناه لاتخاذ قرارات الجولة:</p>
+
+            <!-- الأزرار الـ 3 الأساسية -->
+            <div class="space-y-2">
+                <button onclick="startGame()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-3 rounded-2xl text-xs flex justify-center items-center gap-2 border border-slate-700">
+                    🔄 لمّح مرة أخرى مع جولة جديدة
+                </button>
+                <button onclick="openDetectiveVote()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:brightness-110 text-white font-bold py-3 rounded-2xl text-xs shadow-lg shadow-purple-600/20">
+                    🕵️‍♂️ كشف المحقق
+                </button>
+                <button onclick="openSpyVote()" class="w-full bg-gradient-to-r from-red-600 to-rose-600 hover:brightness-110 text-white font-bold py-3.5 rounded-2xl text-xs shadow-lg shadow-red-600/20">
+                    🚨 اتهام جاسوس
+                </button>
             </div>
+        </main>
 
-            <button onclick="goToVoting()" class="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-black py-3.5 rounded-2xl shadow-lg shadow-cyan-500/20 hover:brightness-110 transition text-sm">
-                🗳️ الانتقال للتصويت لكشف الجاسوس
+        <!-- 6. شاشة التصويت (للمحقق أو الجاسوس) -->
+        <main id="voting-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
+            <h2 id="vote-screen-title" class="text-lg font-bold text-slate-100 mb-1"></h2>
+            <p id="vote-screen-subtitle" class="text-xs text-slate-400 mb-4"></p>
+
+            <div id="voting-candidates-list" class="space-y-2 mb-6"></div>
+
+            <button onclick="confirmVoteAction()" id="confirm-vote-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3 rounded-2xl transition hidden text-xs">
+                تأكيد القصد
             </button>
         </main>
 
-        <!-- 6. شاشة التصويت -->
-        <main id="voting-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-cyan">
-            <h2 class="text-xl font-bold text-slate-100 mb-1">🗳️ مرحلة التصويت</h2>
-            <p class="text-xs text-slate-400 mb-5">من تشكون أنه الجاسوس الذي خارج السالفة؟</p>
-
-            <div id="voting-players-list" class="space-y-2.5 mb-6"></div>
-
-            <button onclick="revealResult()" id="confirm-vote-btn" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 rounded-2xl transition hidden text-sm">
-                🔍 كشف النتيجة والحقيقة
-            </button>
-        </main>
-
-        <!-- 7. شاشة النتيجة ولوحة النقاط -->
+        <!-- 7. شاشة النتائج والحقيقة -->
         <main id="result-screen" class="hidden glass-panel rounded-3xl p-6 text-center glow-amber">
-            <div id="result-badge" class="text-4xl mb-3"></div>
-            <h2 id="result-title" class="text-2xl font-black mb-1"></h2>
-            <p id="result-subtitle" class="text-xs text-slate-300 mb-6"></p>
+            <div id="result-icon" class="text-4xl mb-2"></div>
+            <h2 id="result-title" class="text-xl font-black mb-1"></h2>
+            <p id="result-desc" class="text-xs text-slate-300 mb-5 leading-relaxed"></p>
 
-            <!-- تفاصيل السالفة والجاسوس -->
-            <div class="bg-slate-950/80 border border-slate-800 p-4 rounded-2xl mb-6 text-right space-y-2 text-xs">
-                <p><span class="text-slate-400">السالفة الحقيقية:</span> <strong id="reveal-topic" class="text-amber-400 font-bold"></strong></p>
-                <p><span class="text-slate-400">التصنيف:</span> <strong id="reveal-category" class="text-slate-200"></strong></p>
-                <p><span class="text-slate-400">الجاسوس الحقيقي:</span> <strong id="reveal-spy" class="text-red-400 font-bold"></strong></p>
+            <div class="bg-slate-950 p-4 rounded-2xl border border-slate-800 mb-5 text-right space-y-1.5 text-xs">
+                <p><span class="text-slate-400">السالفة الأصلية:</span> <strong id="res-topic" class="text-amber-400"></strong></p>
+                <p><span class="text-slate-400">التصنيف:</span> <strong id="res-category" class="text-slate-200"></strong></p>
+                <p><span class="text-slate-400">الجاسوس الحقيقي:</span> <strong id="res-spy" class="text-red-400"></strong></p>
+                <p><span class="text-slate-400">المحقق الخفي:</span> <strong id="res-detective" class="text-purple-400"></strong></p>
             </div>
 
             <!-- لوحة النقاط -->
-            <div class="mb-6 text-right">
-                <h4 class="text-xs font-bold text-slate-400 mb-2">📊 لوحة النقاط التراكمية:</h4>
-                <div id="scoreboard" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
+            <div class="mb-5 text-right">
+                <h4 class="text-xs font-bold text-slate-400 mb-2">📊 لوحة النقاط:</h4>
+                <div id="scoreboard" class="space-y-1 max-h-32 overflow-y-auto"></div>
             </div>
 
-            <div class="space-y-2">
-                <button onclick="startGame()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 rounded-2xl transition text-sm shadow-lg shadow-amber-500/20">
-                    🔄 جولة جديدة (نفس اللاعبين)
-                </button>
-                <button onclick="showSetup()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-3 rounded-2xl transition text-xs">
-                    ⚙️ تغيير اللاعبين والإعدادات
-                </button>
-            </div>
+            <button onclick="startGame()" class="w-full bg-amber-500 hover:bg-amber-400 text-slate-950 font-black py-3.5 rounded-2xl text-xs transition shadow-lg shadow-amber-500/20">
+                🔄 جولة جديدة بنفس اللاعبين
+            </button>
         </main>
 
     </div>
 
-    <!-- الفوتر -->
-    <footer class="relative z-10 text-center py-4 text-[11px] text-slate-500">
-        Bra El Salfa AI Engine v3.5
-    </footer>
-
     <script>
-        // حالة اللعبة الكاملة
         let players = ["فهد", "سارة", "خالد", "نورة"];
         let scores = {"فهد": 0, "سارة": 0, "خالد": 0, "نورة": 0};
-        let currentRoundData = null;
+        
+        let roundData = null;
         let spyIndex = -1;
-        let currentPlayerIdx = 0;
+        let detectiveIndex = -1;
+        let currentCardIdx = 0;
         let isCardRevealed = false;
-        let selectedVotedPlayerIdx = null;
 
-        // العداد الزمني
-        let timerSeconds = 180;
-        let timerInterval = null;
+        let playerHints = {};
+        let hintWritingIdx = 0;
+        let eggplantHolderIdx = -1;
+        let eggplantSabotagedTargetIdx = -1;
 
-        const sabotageEvents = [
-            "⚠️ يجب على الجميع التحدث باللغة العربية الفصحى فقط!",
-            "⚠️ لا يحق للجاسوس الاستفسار، فقط إجابة الأسئلة!",
-            "⚠️ ممنوع استخدام أي كلمات تحتوي على حرف 'الـ' التعريف!",
-            "⚠️ الإجابة على السؤال التالي يجب أن تكون بنسق نعم أو لا فقط!",
-            "⚠️ اللاعب الذي على يمين الجاسوس يجب أن يجيب كذباً في السؤال القادم!"
-        ];
+        let currentVoteMode = ""; // "SPY" or "DETECTIVE"
+        let selectedVoteIdx = null;
+
+        const funnyWords = ["باذنجان 🍆", "شاورما 🌯", "طبلة 🥁", "طاقية 🧢", "كبسة 🍲", "حبل 🪢"];
 
         function renderPlayers() {
             const list = document.getElementById('players-list');
             list.innerHTML = players.map((p, i) => `
-                <li class="flex justify-between items-center bg-slate-900/80 border border-slate-800 px-4 py-2.5 rounded-xl text-xs font-medium">
-                    <span class="text-slate-200">${p}</span>
-                    <button onclick="removePlayer(${i})" class="text-red-400 hover:text-red-300 font-bold">حذف</button>
+                <li class="flex justify-between items-center bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl text-xs">
+                    <span>${p}</span>
+                    <button onclick="removePlayer(${i})" class="text-red-400 font-bold">حذف</button>
                 </li>
             `).join('');
         }
@@ -234,10 +219,10 @@
             }
         }
 
-        function removePlayer(idx) {
+        function removePlayer(i) {
             if (players.length > 3) {
-                delete scores[players[idx]];
-                players.splice(idx, 1);
+                delete scores[players[i]];
+                players.splice(i, 1);
                 renderPlayers();
             } else {
                 alert("يجب أن يكون عدد اللاعبين 3 على الأقل!");
@@ -246,39 +231,51 @@
 
         async function startGame() {
             if (players.length < 3) {
-                alert("أضف 3 لاعبين على الأقل للبدء!");
+                alert("3 لاعبين على الأقل للبدء!");
                 return;
             }
 
-            hideAllScreens();
+            hideAll();
             document.getElementById('loading-screen').classList.remove('hidden');
 
             try {
-                const response = await fetch('/api/generate');
-                const data = await response.json();
+                const res = await fetch('/api/generate');
+                const data = await res.json();
+                if (!res.ok) throw new Error(data.details ? JSON.stringify(data.details) : data.error);
 
-                if (!response.ok) {
-                    throw new Error(data.details ? JSON.stringify(data.details, null, 2) : (data.error || "فشل الاتصال بالذكاء الاصطناعي"));
+                roundData = data;
+                
+                // تحديد الجاسوس والمحقق
+                spyIndex = Math.floor(Math.random() * players.length);
+                do {
+                    detectiveIndex = Math.floor(Math.random() * players.length);
+                } while (detectiveIndex === spyIndex);
+
+                currentCardIdx = 0;
+                playerHints = {};
+                hintWritingIdx = 0;
+                eggplantSabotagedTargetIdx = -1;
+
+                // زر الباذنجان (20% احتمال)
+                if (roundData.has_eggplant_button) {
+                    eggplantHolderIdx = Math.floor(Math.random() * players.length);
+                } else {
+                    eggplantHolderIdx = -1;
                 }
 
-                currentRoundData = data;
-                spyIndex = Math.floor(Math.random() * players.length);
-                currentPlayerIdx = 0;
-
-                hideAllScreens();
-                setupPlayerCard();
+                hideAll();
+                setupCardScreen();
                 document.getElementById('card-screen').classList.remove('hidden');
 
-            } catch (err) {
-                hideAllScreens();
-                document.getElementById('error-message').innerText = err.message;
-                document.getElementById('error-screen').classList.remove('hidden');
+            } catch(e) {
+                alert("خطأ: " + e.message);
+                showSetup();
             }
         }
 
-        function setupPlayerCard() {
+        function setupCardScreen() {
             isCardRevealed = false;
-            document.getElementById('current-player-name').innerText = players[currentPlayerIdx];
+            document.getElementById('current-player-name').innerText = players[currentCardIdx];
             document.getElementById('card-instruction').classList.remove('hidden');
             document.getElementById('card-content').classList.add('hidden');
             document.getElementById('next-btn').classList.add('hidden');
@@ -288,127 +285,150 @@
             if (isCardRevealed) return;
             isCardRevealed = true;
 
-            const isSpy = (currentPlayerIdx === spyIndex);
-            const cardInstruction = document.getElementById('card-instruction');
-            const cardContent = document.getElementById('card-content');
-            const roleTitle = document.getElementById('role-title');
-            const roleDetails = document.getElementById('role-details');
+            document.getElementById('card-instruction').classList.add('hidden');
+            const content = document.getElementById('card-content');
+            const title = document.getElementById('role-title');
+            const details = document.getElementById('role-details');
+            content.classList.remove('hidden');
 
-            cardInstruction.classList.add('hidden');
-            cardContent.classList.replace('hidden', 'block');
-
-            if (isSpy) {
-                roleTitle.innerText = "🕵️‍♂️ أنت الجاسوس!";
-                roleTitle.className = "text-2xl font-black text-red-500 mb-2";
-                roleDetails.innerText = `التلميح: [${currentRoundData.spy_hint}]`;
+            if (currentCardIdx === spyIndex) {
+                title.innerText = "🕵️‍♂️ أنت الجاسوس!";
+                title.className = "text-xl font-black text-red-500 mb-1";
+                details.innerText = `التصنيف: [${roundData.category}] \n التلميح: [${roundData.spy_hint}]`;
+            } else if (currentCardIdx === detectiveIndex) {
+                title.innerText = "🕵️‍♀️ أنت المحقق الخفي!";
+                title.className = "text-xl font-black text-purple-400 mb-1";
+                details.innerText = `السالفة: [${roundData.topic}] \n مهمتك كشف الجاسوس دون كشف نفسك!`;
             } else {
-                roleTitle.innerText = `السالفة: ${currentRoundData.topic}`;
-                roleTitle.className = "text-2xl font-black text-amber-400 mb-2";
-                roleDetails.innerText = `التصنيف: ${currentRoundData.category}`;
+                title.innerText = `السالفة: ${roundData.topic}`;
+                title.className = "text-xl font-black text-amber-400 mb-1";
+                details.innerText = `التصنيف: ${roundData.category}`;
             }
 
             document.getElementById('next-btn').classList.remove('hidden');
         }
 
         function nextPlayerCard() {
-            currentPlayerIdx++;
-            if (currentPlayerIdx < players.length) {
-                setupPlayerCard();
+            currentCardIdx++;
+            if (currentCardIdx < players.length) {
+                setupCardScreen();
             } else {
-                startDiscussion();
+                startHintWritingPhase();
             }
         }
 
-        function startDiscussion() {
-            hideAllScreens();
+        function startHintWritingPhase() {
+            hideAll();
             
-            // ضبط المود والزر
-            const modeText = currentRoundData.mode === "EMOJI_ONLY" ? "🎭 نمط الإيموجي فقط!" : 
-                             currentRoundData.mode === "REVERSE_HINT" ? "🔄 نمط التلميح العكسي!" : "💬 نمط عادي";
-            document.getElementById('mode-badge').innerText = modeText;
-
-            const sabotageContainer = document.getElementById('sabotage-container');
-            const sabotageBtn = document.getElementById('sabotage-btn');
-            const sabotageText = document.getElementById('sabotage-text');
-            
-            if (currentRoundData.has_sabotage) {
-                sabotageContainer.classList.remove('hidden');
-                sabotageBtn.classList.remove('hidden');
-                sabotageText.classList.add('hidden');
+            // تنبيه القاعدة الخاصة إن وجدت
+            const ruleBanner = document.getElementById('rule-banner');
+            if (roundData.rule === "EMOJI_ONLY") {
+                ruleBanner.innerText = "🥑 قاعدة الجولة: التلميح بالإيموجي فقط! ممنوع الأحرف.";
+                ruleBanner.classList.remove('hidden');
+            } else if (roundData.rule === "REVERSE_HINT") {
+                ruleBanner.innerText = "🔄 قاعدة الجولة: التلميح العكسي! اكتب صفة غير موجودة.";
+                ruleBanner.classList.remove('hidden');
             } else {
-                sabotageContainer.classList.add('hidden');
+                ruleBanner.classList.add('hidden');
             }
 
-            document.getElementById('helper-text').innerText = 'اضغط "من يسأل من؟" لبدء أوّل سؤال في الجولة بشكل عشوائي!';
+            setupNextHintWriter();
+            document.getElementById('hint-input-screen').classList.remove('hidden');
+        }
 
-            // تشغيل العداد 3 دقائق
-            startTimer(180);
+        function setupNextHintWriter() {
+            const writerName = players[hintWritingIdx];
+            document.getElementById('hint-writer-name').innerText = `دور اللاعب: ${writerName}`;
+            document.getElementById('player-hint-input').value = '';
+
+            const eggplantBox = document.getElementById('eggplant-box');
+            if (hintWritingIdx === eggplantHolderIdx) {
+                eggplantBox.classList.remove('hidden');
+                const select = document.getElementById('eggplant-target-select');
+                select.innerHTML = players.map((p, i) => i !== hintWritingIdx ? `<option value="${i}">${p}</option>` : '').join('');
+            } else {
+                eggplantBox.classList.add('hidden');
+            }
+        }
+
+        function applyEggplantSabotage() {
+            const select = document.getElementById('eggplant-target-select');
+            eggplantSabotagedTargetIdx = parseInt(select.value);
+            document.getElementById('eggplant-apply-btn').innerText = "تم التخريب! 🍆";
+            document.getElementById('eggplant-apply-btn').disabled = true;
+        }
+
+        function submitPlayerHint() {
+            const input = document.getElementById('player-hint-input');
+            let text = input.value.trim() || "بدون تلميح";
+
+            playerHints[players[hintWritingIdx]] = text;
+
+            hintWritingIdx++;
+            if (hintWritingIdx < players.length) {
+                setupNextHintWriter();
+            } else {
+                finalizeHintsAndStartDiscussion();
+            }
+        }
+
+        function finalizeHintsAndStartDiscussion() {
+            // استبدال التلميح بالكلمة المضحكة إذا تم التخريب
+            if (eggplantSabotagedTargetIdx !== -1) {
+                const victimName = players[eggplantSabotagedTargetIdx];
+                const randWord = funnyWords[Math.floor(Math.random() * funnyWords.length)];
+                playerHints[victimName] = randWord;
+            }
+
+            hideAll();
+            
+            // استعراض التلميحات
+            const board = document.getElementById('hints-display-board');
+            board.innerHTML = players.map(p => `
+                <div class="bg-slate-900 border border-slate-800 p-2.5 rounded-xl flex justify-between text-xs">
+                    <span class="text-slate-400 font-bold">${p}:</span>
+                    <span class="text-amber-300 font-bold">${playerHints[p]}</span>
+                </div>
+            `).join('');
 
             document.getElementById('discussion-screen').classList.remove('hidden');
         }
 
-        function startTimer(sec) {
-            clearInterval(timerInterval);
-            timerSeconds = sec;
-            updateTimerDisplay();
-
-            timerInterval = setInterval(() => {
-                timerSeconds--;
-                updateTimerDisplay();
-                if (timerSeconds <= 0) {
-                    clearInterval(timerInterval);
-                    alert("⏰ انتهى وقت النقاش! حان وقت التصويت.");
-                    goToVoting();
-                }
-            }, 1000);
+        function openSpyVote() {
+            currentVoteMode = "SPY";
+            document.getElementById('vote-screen-title').innerText = "🚨 اتهام جاسوس";
+            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه الجاسوس الحقيقي؟";
+            renderVoteCandidates();
         }
 
-        function updateTimerDisplay() {
-            const m = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
-            const s = (timerSeconds % 60).toString().padStart(2, '0');
-            document.getElementById('timer-display').innerText = `${m}:${s}`;
+        function openDetectiveVote() {
+            currentVoteMode = "DETECTIVE";
+            document.getElementById('vote-screen-title').innerText = "🕵️‍♂️ كشف المحقق";
+            document.getElementById('vote-screen-subtitle').innerText = "من تعتقدون أنه المحقق الخفي؟";
+            renderVoteCandidates();
         }
 
-        function triggerSabotage() {
-            const randEvent = sabotageEvents[Math.floor(Math.random() * sabotageEvents.length)];
-            const textElem = document.getElementById('sabotage-text');
-            textElem.innerText = randEvent;
-            textElem.classList.remove('hidden');
-            document.getElementById('sabotage-btn').classList.add('hidden');
-        }
-
-        function pickRandomQuestion() {
-            const p1 = players[Math.floor(Math.random() * players.length)];
-            let p2 = players[Math.floor(Math.random() * players.length)];
-            while (p1 === p2) {
-                p2 = players[Math.floor(Math.random() * players.length)];
-            }
-            document.getElementById('helper-text').innerText = `👉 يجب على [${p1}] أن يطرح سؤالاً ذكياً على [${p2}] الآن!`;
-        }
-
-        function goToVoting() {
-            clearInterval(timerInterval);
-            hideAllScreens();
-            selectedVotedPlayerIdx = null;
-
-            const container = document.getElementById('voting-players-list');
+        function renderVoteCandidates() {
+            hideAll();
+            selectedVoteIdx = null;
             document.getElementById('confirm-vote-btn').classList.add('hidden');
 
+            const container = document.getElementById('voting-candidates-list');
             container.innerHTML = players.map((p, i) => `
-                <button onclick="selectVote(${i})" id="vote-btn-${i}" class="w-full flex justify-between items-center bg-slate-900 border border-slate-800 hover:border-amber-400/50 px-4 py-3 rounded-2xl text-xs font-bold transition">
+                <button onclick="selectCandidate(${i})" id="cand-btn-${i}" class="w-full flex justify-between items-center bg-slate-900 border border-slate-800 px-4 py-3 rounded-2xl text-xs font-bold">
                     <span>👤 ${p}</span>
-                    <span class="text-slate-500 text-[10px]">اختيار 🗳️</span>
+                    <span class="text-slate-500 text-[10px]">تحديد</span>
                 </button>
             `).join('');
 
             document.getElementById('voting-screen').classList.remove('hidden');
         }
 
-        function selectVote(idx) {
-            selectedVotedPlayerIdx = idx;
-            players.forEach((_, i) => {
-                const btn = document.getElementById(`vote-btn-${i}`);
-                if (i === idx) {
+        function selectCandidate(i) {
+            selectedVoteIdx = i;
+            players.forEach((_, idx) => {
+                const btn = document.getElementById(`cand-btn-${idx}`);
+                if (idx === i) {
                     btn.className = "w-full flex justify-between items-center bg-amber-500/10 border-2 border-amber-400 px-4 py-3 rounded-2xl text-xs font-bold text-amber-400";
                 } else {
                     btn.className = "w-full flex justify-between items-center bg-slate-900 border border-slate-800 opacity-50 px-4 py-3 rounded-2xl text-xs font-bold";
@@ -417,64 +437,77 @@
             document.getElementById('confirm-vote-btn').classList.remove('hidden');
         }
 
-        function revealResult() {
-            if (selectedVotedPlayerIdx === null) return;
+        function confirmVoteAction() {
+            if (selectedVoteIdx === null) return;
+            hideAll();
 
-            hideAllScreens();
-            const isCorrectSpy = (selectedVotedPlayerIdx === spyIndex);
-            const votedName = players[selectedVotedPlayerIdx];
-            const realSpyName = players[spyIndex];
+            const icon = document.getElementById('result-icon');
+            const title = document.getElementById('result-title');
+            const desc = document.getElementById('result-desc');
 
-            // حساب النقاط
-            if (isCorrectSpy) {
-                // نجح اللاعبون
-                players.forEach((p, i) => {
-                    if (i !== spyIndex) scores[p] = (scores[p] || 0) + 2;
-                });
-                document.getElementById('result-badge').innerText = "🎉";
-                document.getElementById('result-title').innerText = "تم كشف الجاسوس بنجاح!";
-                document.getElementById('result-title').className = "text-2xl font-black text-amber-400 mb-1";
-                document.getElementById('result-subtitle').innerText = `صوتُّم ضد [${votedName}] وكان بالفعل هو الجاسوس الذكي!`;
-            } else {
-                // نجح الجاسوس
-                scores[realSpyName] = (scores[realSpyName] || 0) + 3;
-                document.getElementById('result-badge').innerText = "🕵️‍♂️";
-                document.getElementById('result-title').innerText = "الجاسوس خدع الجميع ونجا!";
-                document.getElementById('result-title').className = "text-2xl font-black text-red-500 mb-1";
-                document.getElementById('result-subtitle').innerText = `صوتُّم ضد المظلوم [${votedName}] بينما الجاسوس الحقيقي كان [${realSpyName}]!`;
+            const votedPlayer = players[selectedVoteIdx];
+            const spyName = players[spyIndex];
+            const detectiveName = players[detectiveIndex];
+
+            if (currentVoteMode === "SPY") {
+                if (selectedVoteIdx === spyIndex) {
+                    // كشف الجاسوس
+                    players.forEach((p, i) => { if (i !== spyIndex) scores[p] = (scores[p] || 0) + 2; });
+                    icon.innerText = "🎉";
+                    title.innerText = "تم كشف الجاسوس بنجاح!";
+                    title.className = "text-xl font-black text-amber-400 mb-1";
+                    desc.innerText = `صوّتم ضد [${votedPlayer}] وكان بالفعل هو الجاسوس!`;
+                } else {
+                    // نجا الجاسوس
+                    scores[spyName] = (scores[spyName] || 0) + 3;
+                    icon.innerText = "🕵️‍♂️";
+                    title.innerText = "الجاسوس خدع الجميع ونجا!";
+                    title.className = "text-xl font-black text-red-500 mb-1";
+                    desc.innerText = `اتهمتم المظلوم [${votedPlayer}] بينما الجاسوس هو [${spyName}]!`;
+                }
+            } else if (currentVoteMode === "DETECTIVE") {
+                if (selectedVoteIdx === detectiveIndex) {
+                    scores[votedPlayer] = (scores[votedPlayer] || 0) + 3;
+                    icon.innerText = "🔍";
+                    title.innerText = "تم كشف المحقق الخفي!";
+                    title.className = "text-xl font-black text-purple-400 mb-1";
+                    desc.innerText = `[${votedPlayer}] هو المحقق بالفعل وحصل على نقاط الاكتشاف!`;
+                } else {
+                    icon.innerText = "❌";
+                    title.innerText = "المحقق ذكي ولم ينكشف!";
+                    title.className = "text-xl font-black text-slate-300 mb-1";
+                    desc.innerText = `اتهمتم [${votedPlayer}] ولكنه ليس المحقق! المحقق هو [${detectiveName}].`;
+                }
             }
 
-            // تعبئة البيانات
-            document.getElementById('reveal-topic').innerText = currentRoundData.topic;
-            document.getElementById('reveal-category').innerText = currentRoundData.category;
-            document.getElementById('reveal-spy').innerText = realSpyName;
+            document.getElementById('res-topic').innerText = roundData.topic;
+            document.getElementById('res-category').innerText = roundData.category;
+            document.getElementById('res-spy').innerText = spyName;
+            document.getElementById('res-detective').innerText = detectiveName;
 
-            // تحديث لوحة النقاط
             renderScoreboard();
-
             document.getElementById('result-screen').classList.remove('hidden');
         }
 
         function renderScoreboard() {
             const board = document.getElementById('scoreboard');
-            const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-            board.innerHTML = sorted.map(([name, score], rank) => `
-                <div class="flex justify-between items-center bg-slate-900 px-3 py-2 rounded-xl text-xs">
-                    <span class="font-bold ${rank === 0 ? 'text-amber-400' : 'text-slate-300'}">#${rank+1} ${name}</span>
-                    <span class="font-mono text-amber-400 font-bold">${score} نقطة</span>
+            const sorted = Object.entries(scores).sort((a,b) => b[1] - a[1]);
+            board.innerHTML = sorted.map(([name, sc], rank) => `
+                <div class="flex justify-between items-center bg-slate-900 px-3 py-1.5 rounded-xl text-xs">
+                    <span class="${rank === 0 ? 'text-amber-400 font-bold' : 'text-slate-300'}">#${rank+1} ${name}</span>
+                    <span class="font-mono text-amber-400 font-bold">${sc} نقطة</span>
                 </div>
             `).join('');
         }
 
-        function hideAllScreens() {
-            ['setup-screen', 'loading-screen', 'error-screen', 'card-screen', 'discussion-screen', 'voting-screen', 'result-screen'].forEach(id => {
+        function hideAll() {
+            ['setup-screen', 'loading-screen', 'card-screen', 'hint-input-screen', 'discussion-screen', 'voting-screen', 'result-screen'].forEach(id => {
                 document.getElementById(id).classList.add('hidden');
             });
         }
 
         function showSetup() {
-            clearInterval(timerInterval);
-            hideAllScreens();
+            hideAll();
             renderPlayers();
             document.getElementById('setup-screen').classList.remove('hidden');
         }
