@@ -3,444 +3,221 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>برا السالفة: كاشف ضد جاسوس</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>لعبة برا السالفة - AI</title>
+    <script src="[https://cdn.tailwindcss.com](https://cdn.tailwindcss.com)"></script>
+    <link href="[https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap](https://fonts.googleapis.com/css2?family=Tajawal:wght@500;700;900&display=swap)" rel="stylesheet">
     <style>
         body { font-family: 'Tajawal', sans-serif; }
-        .glass { background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
-        .neon-glow-purple { box-shadow: 0 0 25px rgba(168, 85, 247, 0.4); }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between items-center p-4 selection:bg-purple-500 selection:text-white">
+<body class="bg-slate-950 text-white min-h-screen flex flex-col justify-between p-4">
 
-    <!-- Header / Branding -->
-    <header class="w-full max-w-xl text-center py-4">
-        <h1 class="text-4xl font-black bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 bg-clip-text text-transparent drop-shadow-md">
-            🕵️‍♂️ برا السالفة
-        </h1>
-        <p class="text-xs text-slate-400 mt-1 tracking-widest uppercase">النسخة المتقدمة: كاشف VS جاسوس (مدعوم بالذكاء الاصطناعي)</p>
+    <!-- الهيدر -->
+    <header class="text-center py-4 border-b border-slate-800">
+        <h1 class="text-3xl font-black text-amber-400 tracking-wide">🕵️‍♂️ برا السالفة</h1>
+        <p class="text-slate-400 text-sm mt-1">توليد حقيقي ومباشر بالذكاء الاصطناعي</p>
     </header>
 
-    <!-- Main Dynamic Screen Container -->
-    <main id="app" class="w-full max-w-xl glass rounded-3xl p-6 shadow-2xl relative overflow-hidden my-auto">
-        <!-- Screens will be injected here via JavaScript -->
+    <!-- شاشة الإعدادات -->
+    <main id="setup-screen" class="max-w-md mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl my-auto">
+        <h2 class="text-xl font-bold mb-4 text-slate-200 text-center">إعداد اللاعبين</h2>
+        
+        <div class="flex gap-2 mb-4">
+            <input type="text" id="player-name-input" placeholder="اسم اللاعب..." class="flex-1 bg-slate-800 border border-slate-700 rounded-xl px-4 py-2 focus:outline-none focus:border-amber-400 text-white">
+            <button onclick="addPlayer()" class="bg-amber-500 hover:bg-amber-600 font-bold text-slate-950 px-4 py-2 rounded-xl transition">إضافة</button>
+        </div>
+
+        <ul id="players-list" class="space-y-2 mb-6 max-h-48 overflow-y-auto pr-1"></ul>
+
+        <button onclick="startGame()" class="w-full bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-black text-lg py-3 rounded-xl shadow-lg hover:brightness-110 transition flex justify-center items-center gap-2">
+            🚀 بدء الجولة الجديدة
+        </button>
     </main>
 
-    <!-- Developer Credit Footer -->
-    <footer class="w-full max-w-xl text-center py-4 border-t border-slate-800/60 mt-auto">
-        <p class="text-sm font-semibold text-slate-400">
-            👑 إعداد وتطوير المبدع: <span class="text-purple-400 font-bold text-base hover:text-cyan-400 transition-colors">توات سليسو</span>
-        </p>
-        <p class="text-xs text-slate-600 mt-0.5">جميع الحقوق محفوظة © 2026</p>
+    <!-- شاشة التحميل الحي -->
+    <main id="loading-screen" class="hidden max-w-md mx-auto w-full text-center py-20 my-auto">
+        <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-amber-500 border-t-transparent mb-4"></div>
+        <p class="text-lg font-bold text-slate-300">جاري الاتصال بـ Gemini API وتوليد شيء مادي عشوائي...</p>
+    </main>
+
+    <!-- شاشة عرض الخطأ (في حال عدم ضبط GEMINI_KEY) -->
+    <main id="error-screen" class="hidden max-w-md mx-auto w-full bg-red-950/80 border border-red-500 rounded-2xl p-6 my-auto text-center">
+        <h3 class="text-xl font-bold text-red-400 mb-2">🛑 فشل توليد الذكاء الاصطناعي</h3>
+        <p id="error-message" class="text-red-200 text-sm mb-4 leading-relaxed"></p>
+        <button onclick="showSetup()" class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-6 py-2 rounded-xl">العودة للإعدادات</button>
+    </main>
+
+    <!-- شاشة كشف الكروت -->
+    <main id="card-screen" class="hidden max-w-md mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl text-center my-auto">
+        <span class="text-xs font-bold text-slate-400 uppercase tracking-widest bg-slate-800 px-3 py-1 rounded-full">دور اللاعب</span>
+        <h2 id="current-player-name" class="text-3xl font-black text-amber-400 my-4"></h2>
+        
+        <div id="card-box" class="bg-slate-950 border-2 border-dashed border-slate-700 rounded-xl p-8 my-6 min-h-[160px] flex flex-col justify-center items-center cursor-pointer hover:border-amber-500 transition" onclick="toggleRoleReveal()">
+            <p id="card-instruction" class="text-slate-400 text-sm font-bold">اضغط هنا لكشف دورك 👁️</p>
+            <div id="card-content" class="hidden">
+                <p id="role-title" class="text-2xl font-black mb-2"></p>
+                <p id="role-details" class="text-slate-300 text-base"></p>
+            </div>
+        </div>
+
+        <button id="next-btn" onclick="nextPlayerCard()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition hidden">
+            اللاعب التالي ➡️
+        </button>
+    </main>
+
+    <!-- شاشة بدء النقاش -->
+    <main id="discussion-screen" class="hidden max-w-md mx-auto w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center my-auto shadow-2xl">
+        <h2 class="text-2xl font-black text-amber-400 mb-2">🔥 بدأت السالفة!</h2>
+        <p id="mode-badge" class="inline-block text-xs font-bold bg-amber-500/10 text-amber-400 border border-amber-500/20 px-3 py-1 rounded-full mb-6"></p>
+        
+        <div id="sabotage-box" class="hidden mb-6 bg-red-950/50 border border-red-500/40 p-4 rounded-xl">
+            <p class="text-red-400 font-bold text-sm">💣 يوجد زر تخريب في هذه الجولة!</p>
+        </div>
+
+        <p class="text-slate-300 text-sm mb-6">ابدأوا بأسئلة ذكية لكشف الجاسوس بدون إعطائه السالفة مباشرة!</p>
+
+        <button onclick="showSetup()" class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl transition">
+            إنهاء الجولة وبدء جولة جديدة
+        </button>
+    </main>
+
+    <footer class="text-center text-xs text-slate-600 py-2">
+        Bra El Salfa AI Engine v3.0
     </footer>
 
-    <!-- Game Logic Script -->
     <script>
-        // State Management
-        let players = ["أحمد", "سارة", "محمد", "خالد"];
-        let roles = {}; 
-        let currentTopicData = null;
-        let currentPlayerIndex = 0;
-        let submittedHints = {};
-        
-        // Manual Sabotage System States
-        let saboteurPlayer = null;    // اللاعب الممنوح قوة التخريب
-        let sabotageTarget = null;    // الضحية المحددة
-        let fakeHintText = "";        // التلميح المفبرك
+        let players = ["فهد", "سارة", "خالد", "نورة"];
+        let currentRoundData = null;
+        let spyIndex = -1;
+        let currentPlayerIdx = 0;
+        let isCardRevealed = false;
 
-        const app = document.getElementById('app');
+        function renderPlayers() {
+            const list = document.getElementById('players-list');
+            list.innerHTML = players.map((p, i) => `
+                <li class="flex justify-between items-center bg-slate-800 px-3 py-2 rounded-lg text-sm">
+                    <span>${p}</span>
+                    <button onclick="removePlayer(${i})" class="text-red-400 hover:text-red-300 font-bold text-xs">حذف</button>
+                </li>
+            `).join('');
+        }
 
-        // Fisher-Yates True Random Shuffle Algorithm
-        function shuffleArray(array) {
-            let arr = [...array];
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
+        function addPlayer() {
+            const input = document.getElementById('player-name-input');
+            if (input.value.trim()) {
+                players.push(input.value.trim());
+                input.value = '';
+                renderPlayers();
             }
-            return arr;
         }
 
-        function renderSetup() {
-            app.innerHTML = `
-                <div class="space-y-6">
-                    <div class="text-center">
-                        <h2 class="text-2xl font-bold text-white mb-2">إعداد اللاعبين</h2>
-                        <p class="text-xs text-slate-400">أدخل أسماء اللاعبين (3 إلى 8 لاعبين)</p>
-                    </div>
-
-                    <div class="space-y-3" id="players-list">
-                        ${players.map((p, i) => `
-                            <div class="flex items-center gap-2">
-                                <input type="text" value="${p}" onchange="updatePlayerName(${i}, this.value)" 
-                                    class="w-full bg-slate-900/80 border border-slate-700 rounded-xl px-4 py-2.5 text-slate-100 focus:outline-none focus:border-purple-500 font-medium">
-                                ${players.length > 3 ? `
-                                    <button onclick="removePlayer(${i})" class="bg-red-500/20 text-red-400 p-2.5 rounded-xl hover:bg-red-500/30">✕</button>
-                                ` : ''}
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <button onclick="addPlayer()" class="w-full bg-slate-800 border border-dashed border-slate-600 hover:border-purple-500 text-slate-300 py-2.5 rounded-xl font-medium transition-all text-sm">
-                        + إضافة لاعب آخر
-                    </button>
-
-                    <button id="start-btn" onclick="startGame()" class="w-full bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white font-bold py-3.5 rounded-2xl shadow-lg neon-glow-purple transition-all text-lg flex justify-center items-center gap-2">
-                        <span>🚀 بدء الجولة</span>
-                    </button>
-                </div>
-            `;
-        }
-
-        function updatePlayerName(i, name) { players[i] = name || `لاعب ${i+1}`; }
-        function addPlayer() { if(players.length < 8) { players.push(`لاعب ${players.length + 1}`); renderSetup(); } }
-        function removePlayer(i) { players.splice(i, 1); renderSetup(); }
-
-        async function fetchAITopic() {
-            try {
-                const response = await fetch('/api/generate');
-                if (!response.ok) throw new Error("فشل الاتصال بالذكاء الاصطناعي");
-                return await response.json();
-            } catch (err) {
-                console.warn("استخدام موضوع احتياطي عند عدم توفر المفتاح:", err);
-                return {
-                    category: "مواقف طريفة",
-                    topic: "واحد نسي مفتاحه داخل السيارة وهي شغالة",
-                    spy_hint: "سهو واحتجاز",
-                    mode: "NORMAL",
-                    has_sabotage: true
-                };
+        function removePlayer(idx) {
+            if (players.length > 3) {
+                players.splice(idx, 1);
+                renderPlayers();
+            } else {
+                alert("يجب أن يكون عدد اللاعبين 3 على الأقل!");
             }
         }
 
         async function startGame() {
-            const btn = document.getElementById('start-btn');
-            btn.disabled = true;
-            btn.innerHTML = `<span class="animate-spin">🤖</span> <span>توليد موضوع فريد عبر OP_KEY...</span>`;
-
-            currentTopicData = await fetchAITopic();
-
-            // Strict Randomization for Roles using Fisher-Yates
-            const shuffledPlayers = shuffleArray(players);
-            const spy = shuffledPlayers[0];
-            const detector = shuffledPlayers[1];
-
-            roles = {};
-            players.forEach(p => {
-                if (p === spy) roles[p] = 'SPY';
-                else if (p === detector) roles[p] = 'DETECTOR';
-                else roles[p] = 'CITIZEN';
-            });
-
-            // Sabotage system initialization
-            saboteurPlayer = null;
-            sabotageTarget = null;
-            fakeHintText = "";
-
-            if (currentTopicData.has_sabotage || Math.random() < 0.25) {
-                const randomCandidates = shuffleArray(players);
-                saboteurPlayer = randomCandidates[0]; // منح زر التخريب للاعب عشوائي تماماً
+            if (players.length < 3) {
+                alert("أضف 3 لاعبين على الأقل للبدء!");
+                return;
             }
 
-            currentPlayerIndex = 0;
-            submittedHints = {};
-            renderRoleReveal();
-        }
+            // إظهار التحميل
+            document.getElementById('setup-screen').classList.add('hidden');
+            document.getElementById('error-screen').classList.add('hidden');
+            document.getElementById('loading-screen').classList.remove('hidden');
 
-        function renderRoleReveal() {
-            const player = players[currentPlayerIndex];
-            const role = roles[player];
+            try {
+                const response = await fetch('/api/generate');
+                const data = await response.json();
 
-            app.innerHTML = `
-                <div class="text-center space-y-6 py-4">
-                    <span class="bg-purple-500/20 text-purple-300 text-xs font-bold px-3 py-1 rounded-full border border-purple-500/30">
-                        مرحلة كشف الكروت
-                    </span>
-                    <h2 class="text-3xl font-black text-white">مرر الجهاز إلى: <span class="text-cyan-400">${player}</span></h2>
-                    
-                    <div id="card-content" class="bg-slate-900 border border-slate-800 p-6 rounded-2xl space-y-4">
-                        <p class="text-slate-400 text-sm">اضغط على الزر أدناه لإظهار بطاقتك السرية</p>
-                        <button onclick="revealRole('${player}', '${role}')" class="bg-purple-600 text-white font-bold px-6 py-3 rounded-xl shadow-md hover:bg-purple-500">
-                            👁️ كشف بطاقتي
-                        </button>
-                    </div>
-                </div>
-            `;
-        }
-
-        function revealRole(player, role) {
-            const card = document.getElementById('card-content');
-            let content = '';
-
-            if (role === 'SPY') {
-                content = `
-                    <div class="space-y-3">
-                        <span class="text-4xl">🥷</span>
-                        <h3 class="text-2xl font-bold text-red-400">أنت الجاسوس!</h3>
-                        <p class="text-xs text-slate-300">أنت خارج السالفة، لكن إليك تلميح أول للربط:</p>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-red-500/30">
-                            <p class="text-xs text-slate-400">التصنيف: <b class="text-white">${currentTopicData.category}</b></p>
-                            <p class="text-sm font-bold text-yellow-400 mt-1">تلميح الجاسوس: "${currentTopicData.spy_hint}"</p>
-                        </div>
-                    </div>
-                `;
-            } else if (role === 'DETECTOR') {
-                content = `
-                    <div class="space-y-3">
-                        <span class="text-4xl">🕵️‍♂️</span>
-                        <h3 class="text-2xl font-bold text-cyan-400">أنت الكاشف!</h3>
-                        <p class="text-xs text-slate-300">تعرف السالفة ومهمتك كشف الجاسوس دون أن يعرف هويتك.</p>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-cyan-500/30">
-                            <p class="text-xs text-slate-400">التصنيف: <b class="text-white">${currentTopicData.category}</b></p>
-                            <p class="text-base font-black text-cyan-300 mt-1">الموضوع: ${currentTopicData.topic}</p>
-                        </div>
-                    </div>
-                `;
-            } else {
-                content = `
-                    <div class="space-y-3">
-                        <span class="text-4xl">👥</span>
-                        <h3 class="text-2xl font-bold text-emerald-400">أنت مواطن بريء</h3>
-                        <p class="text-xs text-slate-300">ساعد الكاشف بتلميحات ذكية دون كشف الكلمة للجاسوس.</p>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-emerald-500/30">
-                            <p class="text-xs text-slate-400">التصنيف: <b class="text-white">${currentTopicData.category}</b></p>
-                            <p class="text-base font-black text-emerald-300 mt-1">الموضوع: ${currentTopicData.topic}</p>
-                        </div>
-                    </div>
-                `;
-            }
-
-            if (currentTopicData.mode === 'EMOJI_ONLY') {
-                content += `<p class="text-xs text-yellow-400 font-bold mt-2">⚠️ قانون الجولة: التلميح بـ الإيموجي فقط! 🥑</p>`;
-            } else if (currentTopicData.mode === 'REVERSE_HINT') {
-                content += `<p class="text-xs text-pink-400 font-bold mt-2">⚠️ قانون الجولة: التلميح بصفة **عكسية** ليست فيه!</p>`;
-            }
-
-            content += `
-                <button onclick="nextRoleReveal()" class="w-full mt-4 bg-slate-800 text-slate-200 py-2.5 rounded-xl font-bold hover:bg-slate-700">
-                    تم، إخفاء البطاقة 🔒
-                </button>
-            `;
-            card.innerHTML = content;
-        }
-
-        function nextRoleReveal() {
-            currentPlayerIndex++;
-            if (currentPlayerIndex < players.length) {
-                renderRoleReveal();
-            } else {
-                currentPlayerIndex = 0;
-                renderHintInput();
-            }
-        }
-
-        function renderHintInput() {
-            const player = players[currentPlayerIndex];
-
-            let html = `
-                <div class="space-y-5 py-2">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3">
-                        <span class="text-xs text-purple-400 font-bold">مرحلة إدخال التلميحات السرية</span>
-                        <span class="text-xs bg-slate-800 px-2.5 py-1 rounded-full text-slate-300">${currentPlayerIndex + 1} / ${players.length}</span>
-                    </div>
-
-                    <h2 class="text-2xl font-bold text-center text-white">دور اللاعب: <span class="text-purple-400">${player}</span></h2>
-                    
-                    <div class="space-y-3">
-                        <label class="block text-xs text-slate-400 text-right">اكتب تلميحك السري:</label>
-                        <input type="text" id="hint-input" placeholder="اكتب تلميحك هنا..." 
-                            class="w-full bg-slate-900 border border-slate-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-purple-500 font-medium text-center text-lg">
-                    </div>
-            `;
-
-            // Display manual Sabotage interface if player has the sabotage power
-            if (saboteurPlayer === player && !sabotageTarget) {
-                const otherPlayers = players.filter(p => p !== player);
-                html += `
-                    <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl space-y-3 mt-4 text-right">
-                        <div class="flex items-center gap-2">
-                            <span class="text-xl">🍆</span>
-                            <p class="text-xs text-amber-300 font-bold">لديك قوة التخريب اليدوي! اختر الضحية واكتب التلميح المزيف الذي سيظهر باسمه:</p>
-                        </div>
-                        
-                        <select id="sabotage-victim" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl p-2.5 focus:outline-none">
-                            <option value="">-- اختر الضحية --</option>
-                            ${otherPlayers.map(p => `<option value="${p}">${p}</option>`).join('')}
-                        </select>
-
-                        <input type="text" id="sabotage-fake-text" placeholder="التلميح المزيف الذي سيظهر باسم الضحية..." 
-                            class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl p-2.5 focus:outline-none">
-                    </div>
-                `;
-            }
-
-            html += `
-                    <button onclick="submitHint()" class="w-full bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 rounded-xl transition-all shadow-md mt-2">
-                        تأكيد وإرسال التلميح ➔
-                    </button>
-                </div>
-            `;
-
-            app.innerHTML = html;
-        }
-
-        function submitHint() {
-            const player = players[currentPlayerIndex];
-            const val = document.getElementById('hint-input').value.trim();
-
-            if (!val) { alert("من فضلك أدخل تلميحك أولاً!"); return; }
-
-            // Save actual player hint
-            submittedHints[player] = val;
-
-            // Handle custom manual sabotage assignment
-            if (saboteurPlayer === player && !sabotageTarget) {
-                const victimSelect = document.getElementById('sabotage-victim');
-                const fakeInput = document.getElementById('sabotage-fake-text');
-
-                if (victimSelect && victimSelect.value && fakeInput && fakeInput.value.trim()) {
-                    sabotageTarget = victimSelect.value;
-                    fakeHintText = fakeInput.value.trim();
+                if (!response.ok) {
+                    throw new Error(data.details || data.error || "فشل الاتصال بالذكاء الاصطناعي");
                 }
-            }
 
-            currentPlayerIndex++;
-            if (currentPlayerIndex < players.length) {
-                renderHintInput();
+                currentRoundData = data;
+                spyIndex = Math.floor(Math.random() * players.length);
+                currentPlayerIdx = 0;
+
+                document.getElementById('loading-screen').classList.add('hidden');
+                setupPlayerCard();
+                document.getElementById('card-screen').classList.remove('hidden');
+
+            } catch (err) {
+                document.getElementById('loading-screen').classList.add('hidden');
+                document.getElementById('error-message').innerText = err.message;
+                document.getElementById('error-screen').classList.remove('hidden');
+            }
+        }
+
+        function setupPlayerCard() {
+            isCardRevealed = false;
+            document.getElementById('current-player-name').innerText = players[currentPlayerIdx];
+            document.getElementById('card-instruction').classList.remove('hidden');
+            document.getElementById('card-content').classList.add('hidden');
+            document.getElementById('next-btn').classList.add('hidden');
+        }
+
+        function toggleRoleReveal() {
+            if (isCardRevealed) return;
+            isCardRevealed = true;
+
+            const isSpy = (currentPlayerIdx === spyIndex);
+            const cardInstruction = document.getElementById('card-instruction');
+            const cardContent = document.getElementById('card-content');
+            const roleTitle = document.getElementById('role-title');
+            const roleDetails = document.getElementById('role-details');
+
+            cardInstruction.classList.add('hidden');
+            cardContent.classList.remove('hidden');
+
+            if (isSpy) {
+                roleTitle.innerText = "🕵️‍♂️ أنت الجاسوس!";
+                roleTitle.className = "text-2xl font-black text-red-500 mb-2";
+                roleDetails.innerText = `التلميح الأول: [${currentRoundData.spy_hint}]`;
             } else {
-                renderDiscussionBoard();
-            }
-        }
-
-        function renderDiscussionBoard() {
-            // Apply Fake Hint to Sabotaged Target if sabotage occurred
-            if (sabotageTarget && fakeHintText) {
-                submittedHints[sabotageTarget] = fakeHintText;
+                roleTitle.innerText = `السالفة: ${currentRoundData.topic}`;
+                roleTitle.className = "text-2xl font-black text-amber-400 mb-2";
+                roleDetails.innerText = `التصنيف: ${currentRoundData.category}`;
             }
 
-            app.innerHTML = `
-                <div class="space-y-6">
-                    <div class="text-center border-b border-slate-800 pb-3">
-                        <span class="bg-cyan-500/20 text-cyan-300 text-xs font-bold px-3 py-1 rounded-full border border-cyan-500/30">
-                            مرحلة النقاش والتحليل 🗣️
-                        </span>
-                        <h2 class="text-xl font-bold text-white mt-2">لوحة التلميحات العامة</h2>
-                    </div>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        ${players.map(p => `
-                            <div class="bg-slate-900/90 border border-slate-800 p-3 rounded-2xl flex flex-col justify-between shadow-sm">
-                                <span class="text-xs font-bold text-slate-400 mb-1">${p}</span>
-                                <span class="text-base font-black text-purple-300 bg-slate-950/60 p-2 rounded-xl text-center border border-slate-800/80">
-                                    "${submittedHints[p]}"
-                                </span>
-                            </div>
-                        `).join('')}
-                    </div>
-
-                    <div class="space-y-2 pt-2">
-                        <button onclick="newHintRound()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-sm border border-slate-700">
-                            🔄 جولة تلميح جديدة
-                        </button>
-
-                        <div class="grid grid-cols-2 gap-2">
-                            <button onclick="triggerSpyGuess()" class="bg-red-600/20 border border-red-500/40 text-red-300 hover:bg-red-600/30 font-bold py-3 rounded-xl text-xs">
-                                🥷 تخمين الكاشف (خاص بالجاسوس)
-                            </button>
-                            <button onclick="triggerAccuse()" class="bg-cyan-600/20 border border-cyan-500/40 text-cyan-300 hover:bg-cyan-600/30 font-bold py-3 rounded-xl text-xs">
-                                🕵️‍♂️ اتهام الجاسوس (الكاشف/تصويت)
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            `;
+            document.getElementById('next-btn').classList.remove('hidden');
         }
 
-        function newHintRound() {
-            currentPlayerIndex = 0;
-            submittedHints = {};
-            renderHintInput();
-        }
-
-        function triggerSpyGuess() {
-            app.innerHTML = `
-                <div class="space-y-4 text-center">
-                    <h2 class="text-xl font-bold text-red-400">🥷 مرحلة تخمين الجاسوس!</h2>
-                    <p class="text-xs text-slate-300">اختر الشخص الذي تعتقد أنه "الكاشف":</p>
-
-                    <div class="space-y-2">
-                        ${players.map(p => `
-                            <button onclick="finishGameSpyGuess('${p}')" class="w-full bg-slate-900 border border-slate-700 text-white font-bold py-3 rounded-xl hover:border-red-500">
-                                ${p}
-                            </button>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function finishGameSpyGuess(selectedPlayer) {
-            const detectorPlayer = Object.keys(roles).find(p => roles[p] === 'DETECTOR');
-            const spyPlayer = Object.keys(roles).find(p => roles[p] === 'SPY');
-
-            if (selectedPlayer === detectorPlayer) {
-                renderResult(true, `🏆 فوز ساحق للجاسوس (${spyPlayer})! استطاع كشف المحقق (${detectorPlayer}) بنجاح!`);
+        function nextPlayerCard() {
+            currentPlayerIdx++;
+            if (currentPlayerIdx < players.length) {
+                setupPlayerCard();
             } else {
-                renderResult(false, `❌ خطأ! الجاسوس أخطأ التخمين واختار (${selectedPlayer}). الكاشف الحقيقي هو (${detectorPlayer}). فوز المواطنين والكاشف!`);
+                startDiscussion();
             }
         }
 
-        function triggerAccuse() {
-            app.innerHTML = `
-                <div class="space-y-4 text-center">
-                    <h2 class="text-xl font-bold text-cyan-400">🕵️‍♂️ مرحلة اتهام الجاسوس!</h2>
-                    <p class="text-xs text-slate-300">من هو الشخص المشتبه به كـ "جاسوس"؟</p>
-
-                    <div class="space-y-2">
-                        ${players.map(p => `
-                            <button onclick="finishGameAccuse('${p}')" class="w-full bg-slate-900 border border-slate-700 text-white font-bold py-3 rounded-xl hover:border-cyan-500">
-                                ${p}
-                            </button>
-                        `).join('')}
-                    </div>
-                </div>
-            `;
-        }
-
-        function finishGameAccuse(selectedPlayer) {
-            const spyPlayer = Object.keys(roles).find(p => roles[p] === 'SPY');
-
-            if (selectedPlayer === spyPlayer) {
-                renderResult(true, `🏆 فوز المحقق والمواطنين! تم كشف الجاسوس الحقيقي (${spyPlayer}) بنجاح!`);
+        function startDiscussion() {
+            document.getElementById('card-screen').classList.add('hidden');
+            
+            document.getElementById('mode-badge').innerText = `نمط الجولة: ${currentRoundData.mode}`;
+            if (currentRoundData.has_sabotage) {
+                document.getElementById('sabotage-box').classList.remove('hidden');
             } else {
-                renderResult(false, `❌ اتهام خاطئ! تم اتهام (${selectedPlayer}) البريء، بينما الجاسوس الحقيقي هو (${spyPlayer})! فوز الجاسوس!`);
+                document.getElementById('sabotage-box').classList.add('hidden');
             }
+
+            document.getElementById('discussion-screen').classList.remove('hidden');
         }
 
-        function renderResult(isSuccess, message) {
-            app.innerHTML = `
-                <div class="text-center space-y-6 py-4">
-                    <div class="text-6xl">${isSuccess ? '🎉' : '💀'}</div>
-                    <h2 class="text-2xl font-black ${isSuccess ? 'text-emerald-400' : 'text-red-400'}">نهاية الجولة</h2>
-                    
-                    <div class="bg-slate-900 border border-slate-800 p-4 rounded-2xl text-slate-200 text-sm font-medium leading-relaxed">
-                        ${message}
-                    </div>
-
-                    <div class="bg-slate-950/80 p-3 rounded-xl text-xs space-y-1 text-slate-400 border border-slate-800">
-                        <p>الموضوع الأصلي: <b class="text-white">${currentTopicData.topic}</b></p>
-                        <p>التصنيف: <b class="text-white">${currentTopicData.category}</b></p>
-                    </div>
-
-                    <button onclick="renderSetup()" class="w-full bg-gradient-to-r from-purple-600 to-cyan-600 text-white font-bold py-3.5 rounded-2xl shadow-lg hover:opacity-90 transition-all">
-                        🎮 جولة جديدة
-                    </button>
-                </div>
-            `;
+        function showSetup() {
+            document.getElementById('discussion-screen').classList.add('hidden');
+            document.getElementById('error-screen').classList.add('hidden');
+            document.getElementById('card-screen').classList.add('hidden');
+            document.getElementById('setup-screen').classList.remove('hidden');
         }
 
-        // Initialize App
-        renderSetup();
+        renderPlayers();
     </script>
 </body>
 </html>
