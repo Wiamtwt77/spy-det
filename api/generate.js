@@ -1,37 +1,37 @@
 export default async function handler(req, res) {
-  // منع التخزين المؤقت نهائياً لضمان عدم تكرار النتيجة
+  // منع الكاش نهائياً
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
 
-  // قراءة مفتاح Gemini المعتمد حديثاً
-  const apiKey = process.env.GEMINI_KEY;
+  // قراءة مفتاح Gemini من المتغير OP_KEY
+  const apiKey = process.env.OP_KEY;
 
   if (!apiKey) {
     return res.status(500).json({ 
-      error: "المتغير GEMINI_KEY غير مضاف في Vercel!",
-      solution: "اذهب إلى إعدادات Vercel -> Environment Variables وأضف GEMINI_KEY بمفتاحك الخاص ثم أعد الرفع (Redeploy)."
+      error: "المتغير OP_KEY غير مضاف في Vercel!",
+      details: "يرجى إضافة OP_KEY في Environment Variables على Vercel ثم إعادة الرفع (Redeploy)."
     });
   }
 
-  // بذور عشوائية مع طابع زمني دقيق بالملي ثانية
+  // بذور عشوائية لكسر التكرار
   const randomSeed = Math.floor(Math.random() * 99999999);
-  const now = new Date().getTime();
+  const timestamp = new Date().getTime();
 
   const DYNAMIC_PROMPT = `
-[Nonce: ${randomSeed}_${now}]
-أنت المحرك لتوليد جولة جديدة في لعبة "برا السالفة".
+[RandomSeed: ${randomSeed}_${timestamp}]
+أنت محرك توليد المواضيع للعبة "برا السالفة".
 
-مهمتك: اختر شيئاً مادياً ملموساً كلياً من العالم الواقعي بشكل عشوائي شاطح وغير متوقع.
+اختر موضوعاً مادياً ملموساً كلياً وعشوائياً من الحياة الواقعية (أداة، جهاز، قطعة أثاث، طعام، لباس، أداة مطبخ، إلخ).
 
 الشروط:
-1. topic: اسم شيء مادي ملموس فقط (مثل: أداة، لباس، أثاث، جهاز، طعام، قطعة في منزل، وسيلة نقل، أداة مطبخ، مادة ملموسة، إلخ). لا تقم بتوليد سيناريوهات أو قصة.
-2. category: تصنيف مادي يناسب الشيء.
-3. spy_hint: صفة أو كلمة واحدة مبهمة جداً تلمح للشيء دون كشفه.
+1. topic: اسم الشيء المادي الملموس فقط (كلمة أو كلمتين).
+2. category: تصنيف مادي مناسب لـ topic.
+3. spy_hint: صفة أو كلمة واحدة مبهمة تلمح للشيء دون كشفه.
 4. mode: اختر عشوائياً ("NORMAL" بنسبة 70%، "EMOJI_ONLY" بنسبة 15%، "REVERSE_HINT" بنسبة 15%).
-5. has_sabotage: قيمة بولينية عشوائية (true بنسبة 25%، وإلا false).
+5. has_sabotage: boolean عشوائي (true أو false).
 
-أرجِع النتيجة بتنسيق JSON حصراً بهذا الشكل:
+أرجِع النتيجة بتنسيق JSON حصراً بدون أي شروحات أو Markdown:
 {
   "category": "...",
   "topic": "...",
@@ -61,13 +61,14 @@ export default async function handler(req, res) {
 
     if (!response.ok) {
       return res.status(response.status).json({ 
-        error: "فشل الاتصال بـ Gemini API", 
+        error: "خطأ في استجابة Gemini API", 
         details: data.error?.message || data 
       });
     }
 
     let rawText = data.candidates[0].content.parts[0].text.trim();
 
+    // تنظيف النتيجة إذا أُرجعت داخل أقواس Markdown
     if (rawText.startsWith("```")) {
       rawText = rawText.replace(/^```(json)?/, "").replace(/```$/, "").trim();
     }
@@ -77,7 +78,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     return res.status(500).json({ 
-      error: "خطأ معالجة في السيرفر", 
+      error: "خطأ معالجة السيرفر المحلي", 
       message: error.message 
     });
   }
