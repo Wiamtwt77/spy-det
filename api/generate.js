@@ -1,9 +1,10 @@
 export default async function handler(req, res) {
-  // 1. إجبار المتصفح و Vercel على عدم تخزين أي نتيجة مؤقتاً (No Caching)
+  // 1. إجبار Vercel والمتصفح على عدم تخزين الاستجابة مؤقتاً نهائياً (No Caching)
   res.setHeader('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
   res.setHeader('Pragma', 'no-cache');
   res.setHeader('Expires', '0');
 
+  // 2. قراءة مفتاح Gemini من المتغير OP_KEY
   const apiKey = process.env.OP_KEY;
 
   if (!apiKey) {
@@ -12,76 +13,85 @@ export default async function handler(req, res) {
     });
   }
 
-  // 2. مولد عشوائية فريد + الطابع الزمني لضمان تغير الـ Prompt في كل جولة
-  const randomSeed = Math.floor(Math.random() * 1000000);
+  // 3. مولد عشوائية فريد + طابع زمني دقيق لضمان كسر الذاكرة وتنوع النتائج 100%
+  const randomSeed = Math.floor(Math.random() * 100000000);
   const timestamp = new Date().toISOString();
 
   const SYSTEM_PROMPT = `
-الوقت: ${timestamp}
-معرف العشوائية: ${randomSeed}
+[معرف العشوائية الفريد: ${randomSeed}]
+[الطابع الزمني: ${timestamp}]
 
-أنت المحرك الأساسي لتوليد بيانات لعبة التخمين والاستنتاج (برا السالفة).
+أنت المحرك الذكي المباشر لتوليد جولات لعبة "برا السالفة" الجماعية.
+مهمتك: توليد جولة جديدة تماماً وبشكل عشوائي -حرفياً ورياضياً- وبدون السير على أي قالب أو نمط مكرر نهائياً!
 
-شروط وقواعد التوليد (اختر شيئاً مائة بالمائة عشوائي ومادي):
-1. topic: يجب أن يكون شيئاً مادياً ملموساً تماماً (مثل: أداة، طعام، جهاز، أثاث، ملابس، مكان ملموس، مادة، إلخ). يمكنك اختيار أي شيء مادي يخطر ببالك بدون قوالب أو أمثلة.
-2. category: تصنيف مادي مناسب (أجهزة، مطبخ، أطعمة، أثاث، وسائل نقل، إلخ).
-3. spy_hint: كلمة واحدة أو صفة مجردة جداً تلمح للشيء دون كشفه.
-4. mode: اختر عشوائياً بين ("NORMAL" بنسبة 70%، "EMOJI_ONLY" بنسبة 15%، "REVERSE_HINT" بنسبة 15%).
-5. has_sabotage: true أو false عشوائياً (25% احتمال true).
+قواعد التوليد العشوائي المطلق:
 
-يجب أن ترجع الاستجابة فقط بتنسيق JSON صحيح بهذا الشكل ودون أي نصوص إضافية:
+1. topic (الموضوع):
+   - يجب أن يكون شيئاً مادياً ملموساً تماماً من عالمنا (أداة، أثاث، جهاز، طعام، لباس، أداة غريبة، وسيلة نقل، أداة مطبخ، قطعة في المنزل، إلخ).
+   - اختر الموضوع بعشوائية شاطحة وقمّة في التنوع والتفرد، ويمنع تماماً كتابة أي قصص أو سيناريوهات (اسم الشيء فقط).
+
+2. category (التصنيف):
+   - حدد التصنيف المادي المناسب للشيء المادي المختار.
+
+3. spy_hint (تلميح الجاسوس):
+   - كلمة واحدة أو صفة مجردة جداً تلمح للشيء المادي دون كشف اسمه.
+
+4. mode (نمط الجولة):
+   - اختر عشوائياً كلياً إحدى القيم التالية: ("NORMAL" بنسبة 70%، "EMOJI_ONLY" بنسبة 15%، "REVERSE_HINT" بنسبة 15%).
+
+5. has_sabotage (زر التخريب):
+   - قيمة بولينية عشوائية تماماً (true أو false).
+
+المطلوب: إرجاع كائن JSON فقط بدون أي نصوص أو شروحات إضافية، بالصيغة التالية:
 {
-  "category": "...",
-  "topic": "...",
-  "spy_hint": "...",
+  "category": "اسم التصنيف المادي",
+  "topic": "الشيء المادي",
+  "spy_hint": "تلميح الجاسوس",
   "mode": "NORMAL",
-  "has_sabotage": false
+  "has_sabotage": true
 }
 `;
 
   try {
-    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Authorization": `Bearer ${apiKey}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": "https://vercel.com",
-        "X-Title": "Bra El Salfa Game"
-      },
+    // الاتصال برابط Google Gemini 1.5 Flash المباشر بواسطة مفتاح OP_KEY
+    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        model: "openai/gpt-4o-mini", // موديل مستقر وممتاز على OpenRouter
-        messages: [
-          { role: "user", content: SYSTEM_PROMPT }
-        ],
-        temperature: 1.2 // درجة عشوائية عالية
+        contents: [{ parts: [{ text: SYSTEM_PROMPT }] }],
+        generationConfig: { 
+          response_mime_type: "application/json",
+          temperature: 1.0, // أقصى درجة عشوائية وابتكار مسموح بها في Gemini API
+          topP: 0.95
+        }
       })
     });
 
     const data = await response.json();
 
-    // 3. في حال وجود خطأ في OpenRouter (مثل مفتاح خاطئ أو عدم وجود رصيد) إظهاره بوضوح
+    // في حال وجود خطأ في المفتاح أو الخدمة
     if (!response.ok) {
-      console.error("OpenRouter Response Error:", data);
+      console.error("Gemini API Error Response:", data);
       return res.status(response.status).json({ 
-        error: "فشل طلب OpenRouter", 
-        details: data.error || data 
+        error: "فشل طلب Gemini API", 
+        details: data.error?.message || data 
       });
     }
 
-    let rawContent = data.choices[0].message.content.trim();
-    
-    // تنظيف النتيجة إذا أرجعها الموديل داخل فواصل Markdown
-    if (rawContent.startsWith("```")) {
-      rawContent = rawContent.replace(/^```(json)?/, "").replace(/```$/, "").trim();
+    let rawText = data.candidates[0].content.parts[0].text.trim();
+
+    // تنظيف النص إذا تم إرجاعه داخل markdown
+    if (rawText.startsWith("```")) {
+      rawText = rawText.replace(/^```(json)?/, "").replace(/```$/, "").trim();
     }
 
-    const aiOutput = JSON.parse(rawContent);
+    const aiOutput = JSON.parse(rawText);
     return res.status(200).json(aiOutput);
 
   } catch (error) {
-    console.error("Serverless Function Error:", error);
+    console.error("Gemini Backend Handler Error:", error);
     return res.status(500).json({ 
-      error: "فشل السيرفر في معالجة الاستجابة", 
+      error: "حدث خطأ أثناء معالجة استجابة الذكاء الاصطناعي", 
       message: error.message 
     });
   }
