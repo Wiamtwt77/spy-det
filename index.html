@@ -44,9 +44,9 @@
         let currentPlayerIndex = 0;
         let submittedHints = {};
         
-        // Sabotage System States
-        let saboteurPlayer = null;    // اللاعب صاحب قوة التخريب
-        let sabotageTarget = null;    // الضحية
+        // Manual Sabotage System States
+        let saboteurPlayer = null;    // اللاعب الممنوح قوة التخريب
+        let sabotageTarget = null;    // الضحية المحددة
         let fakeHintText = "";        // التلميح المفبرك
 
         const app = document.getElementById('app');
@@ -104,9 +104,9 @@
             } catch (err) {
                 console.warn("استخدام موضوع احتياطي عند عدم توفر المفتاح:", err);
                 return {
-                    category: "مواقف غريبة",
+                    category: "مواقف طريفة",
                     topic: "واحد نسي مفتاحه داخل السيارة وهي شغالة",
-                    spy_hint: "احتجاز وسهو",
+                    spy_hint: "سهو واحتجاز",
                     mode: "NORMAL",
                     has_sabotage: true
                 };
@@ -116,7 +116,7 @@
         async function startGame() {
             const btn = document.getElementById('start-btn');
             btn.disabled = true;
-            btn.innerHTML = `<span class="animate-spin">🤖</span> <span>توليد موضوع فريد بالذكاء الاصطناعي...</span>`;
+            btn.innerHTML = `<span class="animate-spin">🤖</span> <span>توليد موضوع فريد عبر OP_KEY...</span>`;
 
             currentTopicData = await fetchAITopic();
 
@@ -139,7 +139,7 @@
 
             if (currentTopicData.has_sabotage || Math.random() < 0.25) {
                 const randomCandidates = shuffleArray(players);
-                saboteurPlayer = randomCandidates[0]; // اختيار لاعب عشوائي كلياً لمنحه الزر
+                saboteurPlayer = randomCandidates[0]; // منح زر التخريب للاعب عشوائي تماماً
             }
 
             currentPlayerIndex = 0;
@@ -253,14 +253,14 @@
                     </div>
             `;
 
-            // If this player is the Saboteur, render the custom Sabotage UI!
+            // Display manual Sabotage interface if player has the sabotage power
             if (saboteurPlayer === player && !sabotageTarget) {
                 const otherPlayers = players.filter(p => p !== player);
                 html += `
                     <div class="bg-amber-500/10 border border-amber-500/30 p-4 rounded-2xl space-y-3 mt-4 text-right">
                         <div class="flex items-center gap-2">
                             <span class="text-xl">🍆</span>
-                            <p class="text-xs text-amber-300 font-bold">لديك "زر التخريب"! اختر لاعباً واكتب التلميح المزيف الذي سيظهر باسمه:</p>
+                            <p class="text-xs text-amber-300 font-bold">لديك قوة التخريب اليدوي! اختر الضحية واكتب التلميح المزيف الذي سيظهر باسمه:</p>
                         </div>
                         
                         <select id="sabotage-victim" class="w-full bg-slate-900 border border-slate-700 text-slate-200 text-xs rounded-xl p-2.5 focus:outline-none">
@@ -290,10 +290,10 @@
 
             if (!val) { alert("من فضلك أدخل تلميحك أولاً!"); return; }
 
-            // Save player hint
+            // Save actual player hint
             submittedHints[player] = val;
 
-            // Handle manual sabotage setup if this player is the saboteur
+            // Handle custom manual sabotage assignment
             if (saboteurPlayer === player && !sabotageTarget) {
                 const victimSelect = document.getElementById('sabotage-victim');
                 const fakeInput = document.getElementById('sabotage-fake-text');
@@ -313,7 +313,7 @@
         }
 
         function renderDiscussionBoard() {
-            // Apply Fake Hint to Sabotaged Target if specified
+            // Apply Fake Hint to Sabotaged Target if sabotage occurred
             if (sabotageTarget && fakeHintText) {
                 submittedHints[sabotageTarget] = fakeHintText;
             }
